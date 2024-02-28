@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 class usuarioController extends Controller
 {
     public function ctrIngresoUsuario(){
-        echo "www";
+        
         if (isset($_POST['usuario'])) {
-            echo $usuario = $_POST['usuario'];
-            echo $password = $_POST['password'];
-            view('panel');
+            $usuario = $_POST['usuario'];
+            $password = $_POST['password'];
+
+            echo view('header');
+            echo view('asideMenu');
+            echo view('footer');
+            
         }
-        view('panel');
+       
     }
 }

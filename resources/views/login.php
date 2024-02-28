@@ -3,6 +3,8 @@
 use App\Http\Controllers\usuarioController;
 
 include 'header.php';
+//sesion del token
+$token = session()->token();
 ?>
 
 <body class="hold-transition login-page">
@@ -16,8 +18,8 @@ include 'header.php';
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Ingrese sus credenciales para Acceder al Sistema</p>
 
-                <form action="panel">
-                
+                <form action="/panel" method="POST">
+                <input type="hidden" name="_token" value="<?php echo $token; ?>">
                <!--  -->
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Login de usuario" name="usuario">
