@@ -3,20 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use \DB;
 
 class usuarioController extends Controller
 {
     public function ctrIngresoUsuario(){
         
-        if (isset($_POST['usuario'])) {
-            $usuario = $_POST['usuario'];
-            $password = $_POST['password'];
+            /*$usuario = $_POST['usuario'];
+            $password = $_POST['password'];*/
 
-            echo view('header');
             echo view('asideMenu');
+            echo view('panelInicio');
             echo view('footer');
             
-        }
        
     }
+  
+  public function testdb(){
+    return User::all();
+  }
 }

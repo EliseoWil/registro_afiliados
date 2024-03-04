@@ -56,7 +56,7 @@ $token = session()->token();
 
                 <form action="/panel" method="POST">
                 <input type="hidden" name="_token" value="<?php echo $token; ?>">
-               <!--  -->
+
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Login de usuario" name="usuario">
                         <div class="input-group-append">
@@ -84,10 +84,6 @@ $token = session()->token();
                         <!-- /.col -->
                     </div>
 
-                    <?php
-                        $login = new usuarioController;
-                        $login->ctrIngresoUsuario();
-                    ?>
                 </form>
 
             </div>

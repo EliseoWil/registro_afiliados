@@ -16,9 +16,13 @@ use App\Http\Controllers\EstudianteController;
 |
 */
 
+//default route
 Route::get('/', function () {
     return view('login');
 });
+//prueba db
+Route::get('/usuarios', [usuarioController::class, 'testdb']);
+
 Route::post('/panel', [usuarioController::class, 'ctrIngresoUsuario'])->name('usuario.ingresoUsuario');
 Route::get('/VEstudiante', [EstudianteController::class, 'index'])->name('estudiante.index');
 Route::get('/nuevo-estudiante', [EstudianteController::class, 'nuevoEstudiante'])->name('nuevo-estudiante');
