@@ -14,4 +14,8 @@ class User extends Model
   protected $table="usuario";
   protected $primaryKey="id_usuario";
   use HasFactory;
+  
+  function acceso($login){
+    return
+  }
 }

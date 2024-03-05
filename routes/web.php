@@ -23,7 +23,7 @@ Route::get('/', function () {
 //prueba db
 Route::get('/usuarios', [usuarioController::class, 'testdb']);
 
-Route::post('/panel', [usuarioController::class, 'ctrIngresoUsuario'])->name('usuario.ingresoUsuario');
+Route::post('/panel', [usuarioController::class, 'ctrIngresoUsuario']);
 Route::get('/VEstudiante', [EstudianteController::class, 'index'])->name('estudiante.index');
 Route::get('/nuevo-estudiante', [EstudianteController::class, 'nuevoEstudiante'])->name('nuevo-estudiante');
 
