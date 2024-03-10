@@ -62,15 +62,15 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['mensaje']['credenciales'])) 
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Ingrese sus credenciales para Acceder al Sistema</p>
-                
+
                 <?php
-                if(session('mensaje') && session('mensaje')['credenciales']) {
+                if (session('mensaje') && session('mensaje')['credenciales']) {
                 ?>
                     <div class="alert alert-danger">
                         Credenciales de acceso inválidas..!!!
                     </div>
                 <?php
-                 echo '<script>
+                    echo '<script>
                  setTimeout(function() {
                      window.location.href = "/";
                  }, 2000);
@@ -82,7 +82,7 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['mensaje']['credenciales'])) 
                     <input type="hidden" name="_token" value="<?php echo $token; ?>">
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Login de usuario" name="usuario">
+                        <input type="text" class="form-control" placeholder="Login de usuario" name="login_usuario">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -90,7 +90,7 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['mensaje']['credenciales'])) 
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Ingrese su contraseña" name="password">
+                        <input type="password" class="form-control" placeholder="Ingrese su contraseña" name="password_usuario">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

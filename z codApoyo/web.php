@@ -27,12 +27,7 @@ Route::match(['get', 'post'], '/panel', [usuarioController::class, 'index']);
 Route::get('/VUsuario', [usuarioController::class, 'index'])->name('usuario.index');
 Route::get('/nuevo-usuario', [usuarioController::class, 'nuevoUsuario'])->name('nuevo-usuario');
 Route::post('/crear-usuario', [usuarioController::class, 'store'])->name('crear-usuario');
-Route::get('/eliminarUsuario/{id}', [usuarioController::class, 'eliminarUsuario'])->name('usuario.eliminarUsuario');
-Route::get('/eliminar-usuario/{id}', [usuarioController::class, 'destroy'])->name('usuario.destroy');
-
-Route::post('/panel', [usuarioController::class, 'ctrIngresoUsuario']);
-Route::get('/VEstudiante', [EstudianteController::class, 'index'])->name('estudiante.index');
-Route::get('/nuevo-estudiante', [EstudianteController::class, 'nuevoEstudiante'])->name('nuevo-estudiante');
+Route::post('/eliminarUsuario', [usuarioController::class, 'eliminarUsuario'])->name('usuario.eliminarUsuario');
 
 // rutas para personas
 Route::get('/VPersona', [PersonaController::class, 'index'])->name('persona.index');

@@ -31,6 +31,22 @@ class usuarioController extends Controller
     return view('usuario.FNuevoUsuario');
   }
 
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    //
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
   public function store(Request $request)
   {
 
@@ -79,31 +95,35 @@ class usuarioController extends Controller
     //
   }
 
-  public function eliminarUsuario($id)
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Models\User  $User
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(User $User)
   {
-    return view('usuario.FEliUsuario', compact('id'));
-  }
-
-  public function destroy(string $id)
-  {
-    $usuario = User::find($id);
-    $usuario->delete();
-    session()->flash('actualizado', 'Registro eliminado exitosamente');
-    echo '<script>
-            Swal.fire({
-                icon: "success",
-                showConfirmButton: false,
-                title: "El Registro fue eliminado exitosamente",
-                timer: 2000,
-            });
-            setTimeout(function() {
-                window.location.href = "/VUsuario";
-            }, 2000);
-          </script>';
+    //
   }
 
   public function ctrIngresoUsuario()
   {
+    /* $usuario = $_POST['login_usuario'];
+    $password = $_POST['password_usuario'];
+
+    $consulta = User::where('login_usuario', $usuario)->where('password_usuario', $password)->first();
+
+    if ($consulta) {
+      $session = session();
+
+      echo view('asideMenu');
+      echo view('panelInicio');
+      echo view('footer');
+    } else {
+      Session::flash('mensaje', ['credenciales' => 'Credenciales de acceso inválidas']);
+      return redirect('/');
+    } */
+
     $usuario = $_POST['login_usuario'];
     $password = $_POST['password_usuario'];
 
@@ -124,9 +144,8 @@ class usuarioController extends Controller
     echo view('footer');
   }
 
-  public function salir()
+  public function testdb()
   {
-    Auth::logout();
-    return redirect('/');
+    return User::all();
   }
 }

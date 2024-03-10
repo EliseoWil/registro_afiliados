@@ -47,6 +47,7 @@
 <script src="assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="assets/js/estudiante.js"></script>
 <script src="assets/js/persona.js"></script>
+<script src="assets/js/usuario.js"></script>
 
 <!--====================
 seccion de modals
@@ -86,10 +87,60 @@ seccion de modals
       "responsive": true, 
       "lengthChange": false, 
       "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": [
+      {
+        extend: 'excel',
+        text: '<i class="fas fa-file-excel"></i> Excel',
+        className: 'btn btn-success'
+      },
+      {
+        extend: 'pdf',
+        text: '<i class="fas fa-file-pdf"></i> PDF',
+        className: 'btn btn-danger'
+      },
+      {
+        extend: 'print',
+        text: '<i class="fas fa-print"></i> Imprimir',
+        className: 'btn btn-dark'
+      },
+      {
+        extend: 'colvis',
+        text: '<i class="fas fa-columns"></i> Columnas',
+        className: 'btn btn-secondary'
+      }]
     }).buttons().container().appendTo('#DataTable_wrapper .col-md-6:eq(0)');
-
   });
+  $(function () {
+    $("#DataTablePersona").DataTable({
+      "responsive": true, 
+      "lengthChange": false, 
+      "autoWidth": false,
+      "buttons": [
+      {
+        extend: 'excel',
+        text: '<i class="fas fa-file-excel"></i> Excel',
+        className: 'btn btn-success'
+      },
+      {
+        extend: 'pdf',
+        text: '<i class="fas fa-file-pdf"></i> PDF',
+        className: 'btn btn-danger'
+      },
+      {
+        extend: 'print',
+        text: '<i class="fas fa-print"></i> Imprimir',
+        className: 'btn btn-dark'
+      },
+      {
+        extend: 'colvis',
+        text: '<i class="fas fa-columns"></i> Columnas',
+        className: 'btn btn-secondary'
+      }
+    ]
+    }).buttons().container().appendTo('#DataTablePersona_wrapper .col-md-6:eq(0)');
+  });
+
+  
 </script>
 
 </body>

@@ -1,3 +1,38 @@
+<!-- ====================================================================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
+
+<?php
+if (session('message')) {
+?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            showConfirmButton: false,
+            title: 'El Registro fue creado exitosamente',
+            timer: 2500
+        })
+    </script>
+<?php
+}
+?>
+<!-- <?php
+if (session('eliminado')) {
+?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            showConfirmButton: false,
+            title: 'El Registro fue eliminado exitosamente',
+            timer: 2000,
+        })
+        setTimeout(function() {
+            window.location.href = "/VPersona";
+        }, 2000)
+    </script>
+<?php
+}
+?> -->
 <!-- ========================================================================================================== -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -8,7 +43,7 @@
     </section>
 
     <section class="content">
-        <h4>Lista de Personas</h4>
+        <h4>Lista de Estudiantes</h4>
         <table id="DataTablePersona" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -45,7 +80,7 @@
                                 <button class="btn btn-sm btn-info rounded-pill" onclick="MVerPersona(<?php echo $persona['id_persona'] ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn btn-secondary btn-sm rounded-pill" onclick="MEditPersona(<?php echo $persona['id_persona'] ?>)">
+                                <button class="btn btn-secondary btn-sm rounded-pill" onclick="MEditPersona()">
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <button class="btn btn-danger btn-sm rounded-pill" onclick="MEliPersona(<?php echo $persona['id_persona'] ?>)">
@@ -63,56 +98,3 @@
 
     </section>
 </div>
-
-<!-- ====================================================================================================== -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
-
-<?php
-if (session('message')) {
-?>
-    <script>
-        Swal.fire({
-            icon: 'success',
-            showConfirmButton: false,
-            title: 'El Registro fue creado exitosamente',
-            timer: 2500
-        })
-    </script>
-<?php
-}
-?>
-<!-- <?php
-        if (session('eliminado')) {
-        ?>
-    <script>
-        Swal.fire({
-            icon: 'success',
-            showConfirmButton: false,
-            title: 'El Registro fue eliminado exitosamente',
-            timer: 2000,
-        })
-        setTimeout(function() {
-            window.location.href = "/VPersona";
-        }, 2000)
-    </script>
-<?php
-        }
-?> -->
-<?php
-if (session('actualizado')) {
-?>
-    <script>
-        Swal.fire({
-            icon: "success",
-            showConfirmButton: false,
-            title: "El Registro fue actualizado exitosamente",
-            timer: 2000,
-        });
-       /*  setTimeout(function() {
-            window.location.href = "/VPersona";
-        }, 2000); */
-    </script>;
-<?php
-}
-?>
