@@ -31,21 +31,21 @@
                 ?>
                     <tr>
                         <td><?php echo $cont ?></td>
-                        <td><?php echo $estudiante['id_persona'] ?></td>
+                        <td><?php echo $estudiante['nombre_estu'] . " " . $estudiante['ap_paterno_estu'] . " " . $estudiante['ap_materno_estu'] ?></td>
                         <td><?php echo $estudiante['ru'] ?></td>
                         <td><?php echo $estudiante['curso'] ?></td>
                         <td><?php echo $estudiante['estado_civil'] ?></td>
-                        <td><?php echo $estudiante['id_pais'] ?></td>
+                        <td><?php echo $estudiante['pais'] ?></td>
                         <td><?php echo $estudiante['id_universidad'] ?></td>
                         <td>
-                            <div class="btn-group text-sm">
-                                <button class="btn btn-info" onclick="MVerEstudiante()">
+                            <div class="btn-group text-sm ">
+                                <button class="btn btn-sm btn-info rounded-pill mr-1" onclick="MVerEstudiante(<?php echo $estudiante['id_estudiante'] ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn btn-secondary" onclick="MEditEstudiante()">
+                                <button class="btn btn-secondary btn-sm rounded-pill mr-1" onclick="MEditEstudiante(<?php echo $estudiante['id_estudiante'] ?>)">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn btn-danger" onclick="MEliEstudiante()">
+                                <button class="btn btn-danger btn-sm rounded-pill mr-1" onclick="MEliEstudiante(<?php echo $estudiante['id_estudiante'] ?>)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -60,3 +60,56 @@
 
     </section>
 </div>
+
+<!-- ====================================================================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
+
+<?php
+if (session('message')) {
+?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            showConfirmButton: false,
+            title: 'El Registro fue creado exitosamente',
+            timer: 2500
+        })
+    </script>
+<?php
+}
+?>
+<!-- <?php
+        if (session('eliminado')) {
+        ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            showConfirmButton: false,
+            title: 'El Registro fue eliminado exitosamente',
+            timer: 2000,
+        })
+        setTimeout(function() {
+            window.location.href = "/VPersona";
+        }, 2000)
+    </script>
+<?php
+        }
+?> -->
+<?php
+if (session('actualizado')) {
+?>
+    <script>
+        Swal.fire({
+            icon: "success",
+            showConfirmButton: false,
+            title: "El Registro fue actualizado exitosamente",
+            timer: 2000,
+        });
+        /*  setTimeout(function() {
+             window.location.href = "/VPersona";
+         }, 2000); */
+    </script>;
+<?php
+}
+?>

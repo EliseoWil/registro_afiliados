@@ -20,19 +20,25 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('login');
 });
+Route::post('/panel', [usuarioController::class, 'ctrIngresoUsuario']);
 Route::get('/salir', [usuarioController::class, 'salir'])->name('usuario.salir');
 Route::match(['get', 'post'], '/panel', [usuarioController::class, 'index']);
-//prueba db
-/* Route::get('/usuarios', [usuarioController::class, 'testdb']); */
+//RUTAS PARA USUARIOS
 Route::get('/VUsuario', [usuarioController::class, 'index'])->name('usuario.index');
 Route::get('/nuevo-usuario', [usuarioController::class, 'nuevoUsuario'])->name('nuevo-usuario');
 Route::post('/crear-usuario', [usuarioController::class, 'store'])->name('crear-usuario');
 Route::get('/eliminarUsuario/{id}', [usuarioController::class, 'eliminarUsuario'])->name('usuario.eliminarUsuario');
 Route::get('/eliminar-usuario/{id}', [usuarioController::class, 'destroy'])->name('usuario.destroy');
 
-Route::post('/panel', [usuarioController::class, 'ctrIngresoUsuario']);
+//RUTAS PARA ESTUDIANTES
 Route::get('/VEstudiante', [EstudianteController::class, 'index'])->name('estudiante.index');
 Route::get('/nuevo-estudiante', [EstudianteController::class, 'nuevoEstudiante'])->name('nuevo-estudiante');
+Route::post('/crear-estudiante', [EstudianteController::class, 'store'])->name('estudiante.store');
+Route::get('/ver-estudiante/{id}', [EstudianteController::class, 'show'])->name('estudiante.show');
+Route::get('/eliminarEstudiante/{id}', [EstudianteController::class, 'eliminarEstudiante'])->name('estudiante.eliminarEstudiante');
+Route::get('/eliminar-estudiante/{id}', [EstudianteController::class, 'destroy'])->name('estudiante.destroy');
+Route::get('/edit-estudiante/{id}', [EstudianteController::class, 'editEstudiante'])->name('estudiante.edit');
+Route::post('/editar-estudiante', [EstudianteController::class, 'update'])->name('estudiante.update');
 
 // rutas para personas
 Route::get('/VPersona', [PersonaController::class, 'index'])->name('persona.index');
