@@ -29,6 +29,9 @@ Route::get('/nuevo-usuario', [usuarioController::class, 'nuevoUsuario'])->name('
 Route::post('/crear-usuario', [usuarioController::class, 'store'])->name('crear-usuario');
 Route::get('/eliminarUsuario/{id}', [usuarioController::class, 'eliminarUsuario'])->name('usuario.eliminarUsuario');
 Route::get('/eliminar-usuario/{id}', [usuarioController::class, 'destroy'])->name('usuario.destroy');
+Route::get('/edit-usuario/{id}', [usuarioController::class, 'editUsuario'])->name('usuario.edit');
+Route::post('/editar-usuario', [usuarioController::class, 'update'])->name('usuario.update');
+
 
 //RUTAS PARA ESTUDIANTES
 Route::get('/VEstudiante', [EstudianteController::class, 'index'])->name('estudiante.index');

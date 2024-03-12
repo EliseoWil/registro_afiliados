@@ -47,7 +47,7 @@
                         </td>
                         <td>
                             <div class="btn-group text-sm">
-                                <button class="btn btn-secondary btn-sm rounded-pill" onclick="MEditUsuario()">
+                                <button class="btn btn-secondary btn-sm rounded-pill" onclick="MEditUsuario(<?php echo $user['id_usuario'] ?>)">
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <button class="btn btn-danger btn-sm rounded-pill" onclick="MEliUsuario(<?php echo $user['id_usuario'] ?>)">
@@ -79,10 +79,22 @@ if (session('message')) {
             title: 'El Registro fue creado exitosamente',
             timer: 2500
         })
-        /* setTimeout(function() {
-            window.location.href = '/VUsuario';
-        }, 2500) */
     </script>
+<?php
+}
+?>
+
+<?php
+if (session('actualizado')) {
+?>
+    <script>
+        Swal.fire({
+            icon: "success",
+            showConfirmButton: false,
+            title: "El Registro fue actualizado exitosamente",
+            timer: 2000,
+        });
+    </script>;
 <?php
 }
 ?>

@@ -105,29 +105,30 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, Estudiante $estudiante)
     {
-        $id = $request->id_persona;
-        $persona = Estudiante::find($id);
+        $id = $request->id_estudiante;
+        $estudiante = Estudiante::find($id);
 
-/*         $persona->ci_persona  = $request->input('ci');
-        $persona->complemento  = $request->input('comple');
-        $persona->lugar_emision  = $request->input('emision');
-        $persona->nombre_persona  = $request->input('nombres');
-        $persona->ap_paterno  = $request->input('ap_paterno');
-        $persona->ap_materno  = $request->input('ap_materno');
-        $persona->direccion  = $request->input('direccion');
-        $persona->fecha_nacimiento  = $request->input('nacimiento');
-        $persona->factor  = $request->input('factor');
-        $persona->grupo  = $request->input('grupo');
-        $persona->sexo  = $request->input('sexo');
-        $persona->estado_civil_pers  = $request->input('estadoCivil');
-        $persona->contactos_persona  = $request->input('celular');
-        $persona->datos_referencia  = $request->input('referencia');
-        $persona->pais  = $request->input('pais');
-        $persona->departamento  = $request->input('departamento');
-        $persona->provincia  = $request->input('provincia');
-        $persona->localidad  = $request->input('localidad');
-        $persona->cod_asegurado  = $request->input('codAsegurado'); */
-        $persona->save();
+        $estudiante->ci_estudiante  = $request->input('ci');
+        $estudiante->complemento  = $request->input('comple');
+        $estudiante->lugar_emision  = $request->input('emision');
+        $estudiante->nombre_estu  = $request->input('nombres');
+        $estudiante->ap_paterno_estu  = $request->input('ap_paterno');
+        $estudiante->ap_materno_estu  = $request->input('ap_materno');
+        $estudiante->direccion_estu  = $request->input('direccion');
+        $estudiante->fecha_nacimiento  = $request->input('nacimiento');
+        $estudiante->sexo_estu  = $request->input('sexo');
+        $estudiante->contactos_estu  = $request->input('celular');
+        $estudiante->ru  = $request->input('ru');
+        $estudiante->curso  = $request->input('curso');
+        $estudiante->estado_civil  = $request->input('estadoCivil');
+        $estudiante->observacion  = $request->input('observacion');
+        $estudiante->id_universidad  = $request->input('universidad');
+        $estudiante->pais  = $request->input('pais');
+        $estudiante->departamento  = $request->input('departamento');
+        $estudiante->provincia  = $request->input('provincia');
+        $estudiante->localidad  = $request->input('localidad');
+        $estudiante->cod_asegurado  = $request->input('codAsegurado');
+        $estudiante->save();
     
         session()->flash('actualizado', 'Registro actualizado exitosamente');
         return redirect()->back();

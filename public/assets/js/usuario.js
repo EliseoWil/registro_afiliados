@@ -36,3 +36,17 @@ function EliminarUsuario(id) {
     });
 }
 
+function MEditUsuario(id) {
+    $("#modal-lg").modal("show");
+
+    $.ajax({
+        type: "GET",
+        url: "/edit-usuario/" + id,
+        success: function (data) {
+            $("#content-lg").html(data);
+        }
+    });
+}
+
+
+

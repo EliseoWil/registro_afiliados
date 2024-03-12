@@ -3,6 +3,7 @@ $token = session()->token();
 session_start();
 ?>
 
+
 <div class="modal-header bg-dark">
     <h4 class="modal-title"> REGISTRO NUEVO USUARIO </h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -11,22 +12,24 @@ session_start();
 </div>
 
 <div class="modal-body">
-    <form id="FormRegUsuario" action="/crear-usuario" method="POST">
+    <form id="FormEditUsuario" action="/editar-usuario" method="POST">
         <input type="hidden" name="_token" value="<?php echo $token; ?>">
         <div class="row">
             <div class="form-group col-md-12">
                 <label>Nombre Usuario</label>
-                <input type="text" class="form-control" id="usuario" name="usuario">
+                <input type="text" class="form-control" id="usuario" name="usuario" value="<?php echo $usuario->nombre_usuario ?>">
+                <input type="hidden" class="form-control" id="id_usuario" name="id_usuario" value="<?php echo $usuario->id_usuario ?>">
             </div>
 
             <div class="form-group col-md-6">
                 <label>Login Usuario</label>
-                <input type="text" class="form-control" id="login" name="login">
+                <input type="text" class="form-control" id="login" name="login" value="<?php echo $usuario->login_usuario ?>">
             </div>
 
             <div class="form-group col-md-6">
                 <label>Rol de Usuario</label>
                 <select name="rolUsuario" id="rolUsuario" class="form-control">
+                    <option value="<?php echo $usuario->rol_usuario ?>"><?php echo $usuario->rol_usuario ?></option>
                     <option value="null">Seleccionar</option>
                     <option value="Administrador">Administrador</option>
                     <option value="Otro">Otro</option>
@@ -34,23 +37,36 @@ session_start();
             </div>
 
             <div class="form-group col-md-6">
-                <label>Password</label>
-                <input type="password" class="form-control" id="password" name="password">
+                 <label>Password</label>
+                 <input type="password" class="form-control" id="password" name="password" disabled>
             </div>
-            <div class="form-group col-md-6">
-                <label>Repetir password</label>
-                <input type="password" class="form-control" id="password2" name="password2">
-            </div>
-        </div>
+                <div class="form-group col-md-6">
+                    <label>Repetir password</label>
+                    <input type="password" class="form-control" id="password2" name="password2" disabled>
+                </div>
 
-        <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" ">Guardar</button>
+                 <div class="form-group ml-2">
+                    <input type="checkbox" id="activarCampos" onchange="toggleCampos()"> 
+                    <label for="activarCampos"><i class="fa fa-key" aria-hidden="true"></i> <span class="text-sm text-blue">(Habilitar el cuadro para actualizar contraseñas)</span></label>
+                 </div>
+            </div>
+
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" ">Guardar</button>
+            </div>
         </div>
         <!-- /.card-body -->
     </form>
 </div>
 
+<script>
+    function toggleCampos() {
+        var activarCamposCheckbox = document.getElementById("activarCampos");
+        document.getElementById("password").disabled = !activarCamposCheckbox.checked;
+        document.getElementById("password2").disabled = !activarCamposCheckbox.checked;
+    }
+</script>
 
 <script>
     $(function() {
@@ -58,7 +74,7 @@ session_start();
         });
 
         $(document).ready(function() {
-            $("#FormRegUsuario").validate({
+            $("#FormEditUsuario").validate({
                 rules: {
                     login: {
                         required: true,
