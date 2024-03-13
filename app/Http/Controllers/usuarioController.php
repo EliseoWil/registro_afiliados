@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class usuarioController extends Controller
 {
@@ -34,6 +35,14 @@ class usuarioController extends Controller
   public function store(Request $request)
   {
 
+    // Validación de campos
+    $validator = Validator::make($request->all(), [
+      'password' => 'required|min:6',
+      'password2' => 'required|same:password', // El campo password2 debe ser igual al campo password
+      // Otros campos y reglas de validación...
+    ]);
+
+
     User::create([
       'nombre_usuario' => $request->input('usuario'),
       'login_usuario' => $request->input('login'),
@@ -56,12 +65,14 @@ class usuarioController extends Controller
     //
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\User  $User
-   * @return \Illuminate\Http\Response
-   */
+  public function editUsuario(String $id)
+  {
+    $usuario = User::find($id);
+    return view('usuario.FEditUsuario', [
+      'usuario' => $usuario
+    ]);
+  }
+
   public function edit(User $User)
   {
     //
@@ -74,9 +85,26 @@ class usuarioController extends Controller
    * @param  \App\Models\User  $User
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, User $User)
+  public function update(Request $request, User $usuario)
   {
-    //
+    $id = $request->id_usuario;
+    $usuario = User::find($id);
+
+    if ($request->password == "") {
+      $usuario->nombre_usuario = $request->input('usuario');
+      $usuario->login_usuario = $request->input('login');
+      $usuario->rol_usuario = $request->input('rolUsuario');
+      $usuario->save();
+    } else {
+      $usuario->nombre_usuario = $request->input('usuario');
+      $usuario->login_usuario = $request->input('login');
+      $usuario->rol_usuario = $request->input('rolUsuario');
+      $usuario->password_usuario = Hash::make($request->input('password'));
+      $usuario->save();
+    }
+
+    session()->flash('actualizado', 'Registro actualizado exitosamente');
+    return redirect()->back(); 
   }
 
   public function eliminarUsuario($id)
