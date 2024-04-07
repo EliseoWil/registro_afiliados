@@ -18,6 +18,31 @@ class usuarioController extends Controller
     $users = User::all();
 
     echo view('asideMenu');
+    echo view('panelInicio');
+    echo view('footer');
+  }
+  
+    public function ctrIngresoUsuario()
+  {
+   
+    $usuario = $_POST['login_usuario'];
+    $password = $_POST['password_usuario'];
+
+    $usuarioEncontrado = User::where('login_usuario', $usuario)->first();
+
+    if ($usuarioEncontrado && Hash::check($password, $usuarioEncontrado->password_usuario)) {
+      return redirect('/panel');
+    } else {
+      Session::flash('mensaje', ['credenciales' => 'Credenciales de acceso inválidas']);
+      return redirect('/login');
+    }
+  }
+  
+  public function ctrInfoUsuarios()
+  {
+    $users = User::all();
+
+    echo view('asideMenu');
     echo view('VUsuario', [
       'users' => $users
     ]);
@@ -32,7 +57,7 @@ class usuarioController extends Controller
     return view('usuario.FNuevoUsuario');
   }
 
-  public function store(Request $request)
+  public function ctrRegUsuario(Request $request)
   {
 
     // Validación de campos
@@ -54,12 +79,6 @@ class usuarioController extends Controller
     return redirect()->back();
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\User  $User
-   * @return \Illuminate\Http\Response
-   */
   public function show(User $User)
   {
     //
@@ -78,13 +97,6 @@ class usuarioController extends Controller
     //
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\User  $User
-   * @return \Illuminate\Http\Response
-   */
   public function update(Request $request, User $usuario)
   {
     $id = $request->id_usuario;
@@ -115,35 +127,13 @@ class usuarioController extends Controller
   public function destroy(string $id)
   {
     $usuario = User::find($id);
-    $usuario->delete();
-    session()->flash('actualizado', 'Registro eliminado exitosamente');
-    echo '<script>
-            Swal.fire({
-                icon: "success",
-                showConfirmButton: false,
-                title: "El Registro fue eliminado exitosamente",
-                timer: 2000,
-            });
-            setTimeout(function() {
-                window.location.href = "/VUsuario";
-            }, 2000);
-          </script>';
-  }
-
-  public function ctrIngresoUsuario()
-  {
-    $usuario = $_POST['login_usuario'];
-    $password = $_POST['password_usuario'];
-
-    $usuarioEncontrado = User::where('login_usuario', $usuario)->first();
-
-    if ($usuarioEncontrado && Hash::check($password, $usuarioEncontrado->password_usuario)) {
-      return redirect('/panel');
-    } else {
-      Session::flash('mensaje', ['credenciales' => 'Credenciales de acceso inválidas']);
-      return redirect('/');
+    
+    if($usuario->delete()==true){
+      echo "ok";
     }
+
   }
+
 
   public function ctrCrearUsuario()
   {

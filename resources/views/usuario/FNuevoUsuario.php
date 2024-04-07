@@ -11,7 +11,7 @@ session_start();
 </div>
 
 <div class="modal-body">
-    <form id="FormRegUsuario" action="/crear-usuario" method="POST">
+    <form id="FormRegUsuario" action="crear-usuario" method="POST">
         <input type="hidden" name="_token" value="<?php echo $token; ?>">
         <div class="row">
             <div class="form-group col-md-12">
@@ -45,7 +45,7 @@ session_start();
 
         <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" ">Guardar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
         <!-- /.card-body -->
     </form>

@@ -2,7 +2,7 @@
 $token = session()->token();
 session_start();
 ?>
-<form action="/editar-estudiante" method="POST" id="FormEditEstudiante">
+<form action="editar-estudiante" method="POST" id="FormEditEstudiante">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
   <div class="modal-header bg-dark">
     <h4 class="modal-title">REGISTRO NUEVO ESTUDIANTE</h4>
@@ -43,7 +43,7 @@ session_start();
       </div>
       <div class="form-group col-md-3">
         <label for="">R. U.</label>
-        <input type="text" class="form-control" id="ru" name="ru" value="<?php echo $estudiante->ru ?>">
+        <input type="text" class="form-control" id="ru" name="ru" value="<?php echo $estudiante->ru ?>" readonly>
       </div>
       <div class="form-group col-md-2">
         <label for="">Curso</label>
@@ -53,10 +53,8 @@ session_start();
       <div class="form-group col-md-4">
         <label for="">Género</label>
         <select name="sexo" id="sexo" class="form-control">
-          <option value="<?php echo $estudiante->sexo_estu ?>"><?php echo $estudiante->sexo_estu ?></option>
-          <option value="">-- Seleccionar --</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
+          <option value="1" <?php if($estudiante->sexo_estu=="Masculino"):?>selected<?php endif;?>>Masculino</option>
+          <option value="2" <?php if($estudiante->sexo_estu=="Femenino"):?>selected<?php endif;?>>Femenino</option>
         </select>
       </div>
 
@@ -66,34 +64,68 @@ session_start();
       </div>
       <div class="form-group col-md-3">
         <label for="">Estado Civil</label>
+        <?php
+  $estado_civil=array(
+  "1"=>"Soltero(a)",
+  "2"=>"Casado(a)",
+  "3"=>"Divorciado(a)",
+  "4"=>"Viudo(a)"
+);
+        ?>
         <select name="estadoCivil" id="estadoCivil" class="form-control">
-          <option value="<?php echo $estudiante->estado_civil ?>"><?php echo $estudiante->estado_civil ?></option>
-          <option value="">-- Seleccionar --</option>
-          <option value="Soltero(a)">Soltero(a)</option>
-          <option value="Casado(a)">Casado(a)</option>
-          <option value="Divorciado(a)">Divorciado(a)</option>
-          <option value="Viudo(a)">Viudo(a)</option>
+          <?php foreach($estado_civil as $key=>$valor){
+  if($estudiante->estado_civil==$valor){
+          ?>
+          <option value="<?php echo $key;?>" selected><?php echo $valor;?></option>
+          <?php
+  }else{
+          ?>
+          <option value="<?php echo $key;?>"><?php echo $valor;?></option>
+          <?php
+  }
+}?>
+
         </select>
       </div>
       <div class="form-group col-md-5">
         <label for="">Universidad</label>
         <select name="universidad" id="universidad" class="form-control">
-          <option value="<?php echo $estudiante->id_universidad ?>"><?php echo $estudiante->id_universidad ?></option>
-          <option value="">-- Seleccionar --</option>
-          <option value="1">Universidad 1</option>
-          <option value="2">Universidad 2</option>
-          <option value="3">Universidad 3</option>
-          <option value="4">Universidad 4</option>
+          <?php
+          foreach($universidades as $key=>$value){
+            if($estudiante->id_universidad==$value->id_universidad){
+          ?>
+          <option value="<?php echo $value->id_universidad;?>" selected><?php echo $value->nombre_universidad;?></option>
+          <?php
+            }else{
+          ?>
+          <option value="<?php echo $value->id_universidad;?>"><?php echo $value->nombre_universidad;?></option>
+          <?php
+            }
+
+          }
+          ?>
         </select>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="">COD. Asegurado</label>
-        <input type="text" class="form-control bg-secondary" id="codAsegurado" name="codAsegurado" value="<?php echo $estudiante->cod_asegurado ?>">
       </div>
 
       <div class="form-group col-md-3">
         <label for="">Pais</label>
         <input type="text" class="form-control" id="pais" name="pais" value="<?php echo $estudiante->pais ?>">
+        <select name="pais" id="pais" class="form-control">
+          <?php
+  foreach($universidades as $key=>$value){
+    if($estudiante->id_universidad==$value->id_universidad){
+          ?>
+          <option value="<?php echo $value->id_universidad;?>" selected><?php echo $value->nombre_universidad;?></option>
+          <?php
+    }else{
+          ?>
+          <option value="<?php echo $value->id_universidad;?>"><?php echo $value->nombre_universidad;?></option>
+          <?php
+    }
+
+  }
+          ?>
+        </select>
       </div>
       <div class="form-group col-md-3">
         <label for="">Departamento</label>

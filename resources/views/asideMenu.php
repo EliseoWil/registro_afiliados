@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Registro | Afiliados</title>
+  <title>Registro de Afiliados</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -38,10 +38,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <!-- Preloader -->
-    <!-- <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="assets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div> -->
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -76,13 +72,13 @@
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
         <img src="assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Reg AFILIADOS</span>
+        <span class="brand-text font-weight-light">Sistema de Afiliados</span>
       </a>
 
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 justify-content-center d-flex">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
             <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
@@ -104,22 +100,6 @@
                   Usuarios
                 </p>
               </a>
-              <!-- <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/crear-usuario" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Crear Usuarios</p>
-                  </a>
-                </li>
-              </ul>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="VUsuario" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de Usuarios</p>
-                  </a>
-                </li>
-              </ul> -->
             </li>
 
             <li class="nav-item">
@@ -148,7 +128,7 @@
             </li>
             <li class="nav-header">OPCIONES</li>
             <li class="nav-item">
-              <a href="/salir" class="nav-link">
+              <a href="salir" class="nav-link">
                 <i class="fas fa-door-open nav-icon"></i>
                 <p>
                   Salir

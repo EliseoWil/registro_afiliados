@@ -5,36 +5,34 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Estudiante extends Model
+class MEmpleado extends Model
 {
-    protected $table = "estudiante";
-    protected $primaryKey = "id_estudiante";
+    protected $table = 'empleado';
+    protected $primaryKey = "id_empleado";
     public $timestamps = false;
-    use HasFactory;
     use HasFactory;
 
     protected $fillable = [
-        'ci_estudiante',
+        'ci_empleado',
         'complemento',
         'lugar_emision',
-        'nombre_estu',
-        'ap_paterno_estu',
-        'ap_materno_estu',
-        'direccion_estu',
+        'nombre_empleado',
+        'ap_paterno',
+        'ap_materno',
+        'direccion',
         'fecha_nacimiento',
-        'sexo_estu',
-        'contactos_estu',
-        'ru',
-        'curso',
+        'cargo',
+        'profesion',
+        'salario',
+        'fecha_ingreso_laboral',
+        'sexo',
         'estado_civil',
-        'observacion',
-        'id_universidad',
+        'contactos_empleado',
+        'id_empresa',
         'pais',
         'departamento',
         'provincia',
         'localidad',
         'cod_asegurado'
     ];
-  
-
 }

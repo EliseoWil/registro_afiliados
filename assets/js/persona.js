@@ -1,11 +1,11 @@
 function MNuevoPersona() {
-    $("#modal-lg").modal("show");
+    $("#modal-xl").modal("show");
 
     $.ajax({
         type: "GET",
-        url: "/nuevo-persona",
+        url: "nuevo-persona",
         success: function (data) {
-            $("#content-lg").html(data);
+            $("#content-xl").html(data);
         }
     });
 }
@@ -15,7 +15,7 @@ function MVerPersona(id) {
 
     $.ajax({
         type: "GET",
-        url: "/ver-persona/" + id,
+        url: "ver-persona/" + id,
         success: function (data) {
             $("#content-lg").html(data);
         }
@@ -27,7 +27,7 @@ function MEliPersona(id) {
 
     $.ajax({
         type: "GET",
-        url: "/eliminarPersona/" + id,
+        url: "eliminarPersona/" + id,
         success: function (data) {
             $("#content-default").html(data);
         }
@@ -47,13 +47,13 @@ function EliminarPersona(id) {
 }
 
 function MEditPersona(id) {
-    $("#modal-lg").modal("show");
+    $("#modal-xl").modal("show");
 
     $.ajax({
         type: "GET",
-        url: "/edit-persona/" + id,
+        url: "edit-persona/" + id,
         success: function (data) {
-            $("#content-lg").html(data);
+            $("#content-xl").html(data);
         }
     });
 }

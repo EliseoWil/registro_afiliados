@@ -10,15 +10,15 @@ session_start();
 
 // Verificar si hay un mensaje en la sesión
 if (isset($_SESSION['mensaje']) && isset($_SESSION['mensaje']['credenciales'])) {
-    echo '<div class="alert alert-danger">' . $_SESSION['mensaje']['credenciales'] . '</div>';
-    unset($_SESSION['mensaje']); // Limpiar el mensaje después de mostrarlo
+  echo '<div class="alert alert-danger">' . $_SESSION['mensaje']['credenciales'] . '</div>';
+  unset($_SESSION['mensaje']); // Limpiar el mensaje después de mostrarlo
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard</title>
@@ -50,68 +50,63 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['mensaje']['credenciales'])) 
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <link rel="shortcut icon" href="#">
-</head>
+  </head>
 
-<body class="hold-transition login-page">
+  <body class="hold-transition login-page">
     <div id="back"></div>
     <div class="login-box">
-        <div class="login-logo">
-            <a href=""><b>REGISTRO</b>Afiliados</a>
-        </div>
-        <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Ingrese sus credenciales para Acceder al Sistema</p>
+      <div class="login-logo">
+        <a href=""><b>REGISTRO</b> Afiliados</a>
+      </div>
+      <!-- /.login-logo -->
+      <div class="card">
+        <div class="card-body login-card-body">
+          <p class="login-box-msg">Ingrese sus credenciales para Acceder</p>
 
-                <?php
-                if (session('mensaje') && session('mensaje')['credenciales']) {
-                ?>
-                    <div class="alert alert-danger">
-                        Credenciales de acceso inválidas..!!!
-                    </div>
-                <?php
-                    echo '<script>
-                 setTimeout(function() {
-                     window.location.href = "/";
-                 }, 2000);
-               </script>';
-                }
-                ?>
+          <?php
+          if (session('mensaje') && session('mensaje')['credenciales']) {
+          ?>
+          <div class="alert alert-danger">
+            Credenciales de acceso inválidas..!!!
+          </div>
+          <?php
+          }
+          ?>
 
-                <form action="/panel" method="POST">
-                    <input type="hidden" name="_token" value="<?php echo $token; ?>">
-
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Login de usuario" name="login_usuario">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Ingrese su contraseña" name="password_usuario">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-
-                </form>
-
+          <form method="POST" action="acceso">
+           <!--envio de token de autenticacion para laravel-->
+            <input type="hidden" name="_token" value="<?php echo $token; ?>">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Login de usuario" name="login_usuario">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
             </div>
-            <!-- /.login-card-body -->
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Ingrese su contraseña" name="password_usuario">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8">
+
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+              </div>
+              <!-- /.col -->
+            </div>
+
+          </form>
+
         </div>
+        <!-- /.login-card-body -->
+      </div>
     </div>
     <!-- /.login-box -->

@@ -1,11 +1,11 @@
 function MNuevoEstudiante() {
-  $("#modal-lg").modal("show");
+  $("#modal-xl").modal("show");
 
   $.ajax({
       type: "GET",
-      url: "/nuevo-estudiante",
+      url: "nuevo-estudiante",
       success: function (data) {
-          $("#content-lg").html(data);
+          $("#content-xl").html(data);
       }
   });
 }
@@ -15,7 +15,7 @@ function MVerEstudiante(id) {
 
   $.ajax({
       type: "GET",
-      url: "/ver-estudiante/" + id,
+      url: "ver-estudiante/" + id,
       success: function (data) {
           $("#content-lg").html(data);
       }
@@ -27,7 +27,7 @@ function MEliEstudiante(id) {
 
   $.ajax({
       type: "GET",
-      url: "/eliminarEstudiante/" + id,
+      url: "eliminarEstudiante/" + id,
       success: function (data) {
           $("#content-default").html(data);
       }
@@ -39,7 +39,7 @@ function EliminarEstudiante(id) {
 
   $.ajax({
       type: "GET",
-      url: "/eliminar-estudiante/" + id,
+      url: "eliminar-estudiante/" + id,
       success: function (data) {
           $("#content-default").html(data);
       }
@@ -47,13 +47,13 @@ function EliminarEstudiante(id) {
 }
 
 function MEditEstudiante(id) {
-  $("#modal-lg").modal("show");
+  $("#modal-xl").modal("show");
 
   $.ajax({
       type: "GET",
-      url: "/edit-estudiante/" + id,
+      url: "edit-estudiante/" + id,
       success: function (data) {
-          $("#content-lg").html(data);
+          $("#content-xl").html(data);
       }
   });
 }

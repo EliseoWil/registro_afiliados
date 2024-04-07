@@ -2,7 +2,7 @@
 $token = session()->token();
 session_start();
 ?>
-<form action="/crear-estudiante" method="POST" id="FormRegEstudiante">
+<form action="crear-estudiante" method="POST" id="FormRegEstudiante">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
   <div class="modal-header bg-dark">
     <h4 class="modal-title">REGISTRO NUEVO ESTUDIANTE</h4>
@@ -11,6 +11,7 @@ session_start();
     </button>
   </div>
   <div class="modal-body pb-0 mb-0">
+
     <div class="row">
       <div class="form-group col-md-6">
         <label for="">Nombres</label>
@@ -52,9 +53,8 @@ session_start();
       <div class="form-group col-md-4">
         <label for="">Género</label>
         <select name="sexo" id="sexo" class="form-control">
-          <option value="">-- Seleccionar --</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
+          <option value="1">Masculino</option>
+          <option value="2">Femenino</option>
         </select>
       </div>
 
@@ -76,32 +76,72 @@ session_start();
         <label for="">Universidad</label>
         <select name="universidad" id="universidad" class="form-control">
           <option value="">-- Seleccionar --</option>
-          <option value="1">Universidad 1</option>
-          <option value="2">Universidad 2</option>
-          <option value="3">Universidad 3</option>
-          <option value="4">Universidad 4</option>
+          <?php
+          foreach($universidades as $key=>$value){
+          ?>
+          <option value="<?php echo $value->id_universidad;?>"><?php echo $value->nombre_universidad;?></option>
+          <?php
+          }
+          ?>
         </select>
       </div>
       <div class="form-group col-md-4">
         <label for="">COD. Asegurado</label>
-        <input type="text" class="form-control bg-secondary" id="codAsegurado" name="codAsegurado" placeholder="Código de Asegurado">
+        <input type="text" class="form-control bg-secondary" id="codAsegurado" name="codAsegurado" placeholder="Código de Asegurado" value="codigo1234">
       </div>
 
       <div class="form-group col-md-3">
         <label for="">Pais</label>
-        <input type="text" class="form-control" id="pais" name="pais" placeholder="Ingrese el Pais">
+        <select class="form-control" id="pais" name="pais">
+          <option value="">-- Seleccionar --</option>
+          <?php
+          foreach($paises as $key=>$value){
+          ?>
+          <option value="<?php echo $value->id_pais;?>"><?php echo $value->nombre_pais;?></option>
+          <?php
+          }
+          ?>
+        </select>
       </div>
       <div class="form-group col-md-3">
         <label for="">Departamento</label>
-        <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingrese el Departamento">
+        <select class="form-control" id="departamento" name="departamento">
+          <option value="">-- Seleccionar --</option>
+          <?php
+          foreach($departamentos as $key=>$value){
+          ?>
+          <option value="<?php echo $value->id_departamento;?>"><?php echo $value->nombre_departamento;?></option>
+          <?php
+          }
+          ?>
+        </select>
       </div>
       <div class="form-group col-md-3">
         <label for="">Provincia</label>
-        <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Ingrese la Provincia">
+        <select class="form-control" id="provincia" name="provincia">
+          <option value="">-- Seleccionar --</option>
+          <?php
+          foreach($provincias as $key=>$value){
+          ?>
+          <option value="<?php echo $value->id_provincia;?>"><?php echo $value->nombre_provincia;?></option>
+          <?php
+          }
+          ?>
+        </select>
       </div>
+
       <div class="form-group col-md-3">
         <label for="">Localidad</label>
-        <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese la Localidad">
+        <select class="form-control" id="localidad" name="localidad">
+          <option value="">-- Seleccionar --</option>
+          <?php
+          foreach($localidades as $key=>$value){
+          ?>
+          <option value="<?php echo $value->id_localidad;?>"><?php echo $value->nombre_localidad;?></option>
+          <?php
+          }
+          ?>
+        </select>
       </div>
       <div class="form-group col-md-12">
         <label for="">Dirección</label>
@@ -128,6 +168,21 @@ session_start();
         nombres: {
           required: true,
           minlength: 3
+        },
+        pais: {
+          required: true
+        },
+        localidad: {
+          required: true
+        },
+        provincia: {
+          required: true
+        },
+        universidad: {
+          required: true
+        },
+        departamento: {
+          required: true
         },
         ci: {
           required: true,

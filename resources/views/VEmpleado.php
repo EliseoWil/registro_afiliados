@@ -7,46 +7,45 @@
     </section>
 
     <section class="content">
-        <h4>Lista de Estudiantes</h4>
-
+        <h4>Lista de Empleados Asegurados</h4>
         <table id="DataTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Nro</th>
-                    <th>Nombres</th>
-                    <th>Reg. Universitario</th>
-                    <th>Curso</th>
-                    <th>Estado Civil</th>
-                    <th>Pais</th>
-                    <th>Universidad</th>
+                    <th>Cod. Asegurado</th>
+                    <th>Nombre</th>
+                    <th>Fecha de ingreso</th>
+                    <th>Empresa</th>
+                    <th>Departamento</th>
+                    <th>Provincia</th>
+                    <th>Localidad</th>
                     <td>
-                        <button class="btn btn-primary" onclick="MNuevoEstudiante()"><i class="fas fa-plus"></i> Nuevo Registro</button>
+                        <button class="btn btn-primary" onclick="MNuevoEstudiante()"><i class="fas fa-plus"></i>Nuevo Registro</button>
                     </td>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $cont = 0;
-                foreach ($estudiantes as $key => $estudiante) {
+                foreach ($empleados as $key => $value) {
                     $cont = $cont + 1;
                 ?>
                     <tr>
-                        <td><?php echo $cont ?></td>
-                        <td><?php echo $estudiante['nombre_estu'] . " " . $estudiante['ap_paterno_estu'] . " " . $estudiante['ap_materno_estu'] ?></td>
-                        <td><?php echo $estudiante['ru'] ?></td>
-                        <td><?php echo $estudiante['curso'] ?></td>
-                        <td><?php echo $estudiante['estado_civil'] ?></td>
-                        <td><?php echo $estudiante['pais'] ?></td>
-                        <td><?php echo $estudiante['id_universidad'] ?></td>
+                        <td><?php echo $value["cod_asegurado"]; ?></td>
+                        <td><?php echo $value['nombre_empleado'] . " " . $value['ap_paterno'] . " " . $value['ap_materno']; ?></td>
+                        <td><?php echo $value['fecha_ingreso_laboral']; ?></td>
+                        <td><?php echo $value['id_empresa']; ?></td>
+                        <td><?php echo $value['departamento']; ?></td>
+                        <td><?php echo $value['provincia']; ?></td>
+                        <td><?php echo $value['localidad']; ?></td>
                         <td>
                             <div class="btn-group text-sm ">
-                                <button class="btn btn-sm btn-info rounded-pill mr-1" onclick="MVerEstudiante(<?php echo $estudiante['id_estudiante'] ?>)">
+                                <button class="btn btn-sm btn-info rounded-pill mr-1" onclick="MVerEstudiante(<?php echo $value['id_empleado'] ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn btn-secondary btn-sm rounded-pill mr-1" onclick="MEditEstudiante(<?php echo $estudiante['id_estudiante'] ?>)">
+                                <button class="btn btn-secondary btn-sm rounded-pill mr-1" onclick="MEditEstudiante(<?php echo $value['id_empleado'] ?>)">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn btn-danger btn-sm rounded-pill mr-1" onclick="MEliEstudiante(<?php echo $estudiante['id_estudiante'] ?>)">
+                                <button class="btn btn-danger btn-sm rounded-pill mr-1" onclick="MEliEstudiante(<?php echo $value['id_empleado'] ?>)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -62,7 +61,6 @@
     </section>
 </div>
 
-<!-- ====================================================================================================== -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
 
