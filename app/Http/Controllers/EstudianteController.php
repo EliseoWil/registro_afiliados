@@ -36,13 +36,41 @@ class EstudianteController extends Controller
     ]);
   }
 
-  public function create()
-  {
-    //
-  }
-
   public function store(Request $request)
   {
+    $nombre=str_split(strtoupper($request->input('nombres')));
+    $apPat=str_split(strtoupper($request->input('ap_paterno')));
+    $apMat=str_split(strtoupper($request->input('ap_materno')));
+    $nacimiento=str_split($request->input('nacimiento'));
+
+    $mesFem=array(
+      "01"=>51,
+      "02"=>52,
+      "03"=>53,
+      "04"=>54,
+      "05"=>55,
+      "06"=>56,
+      "07"=>57,
+      "08"=>58,
+      "09"=>59,
+      "10"=>60,
+      "11"=>61,
+      "12"=>62
+    );
+    
+    if($request->input('sexo')=="Masculino"){
+      $codAsegurado=$nacimiento[2].$nacimiento[3]."-".$nacimiento[5].$nacimiento[6].$nacimiento[8].$nacimiento[9]."-".$apPat[0].$apMat[0].$nombre[0];
+    }else{
+      $mes="";
+      $mesNaci=$nacimiento[5].$nacimiento[6];
+      foreach($mesFem as $key=>$value){
+        if($mesNaci==$key){
+          $mes=$value;
+        }
+      }
+      $codAsegurado=$nacimiento[2].$nacimiento[3]."-".$mes.$nacimiento[8].$nacimiento[9]."-".$apPat[0].$apMat[0].$nombre[0];
+    }
+    
     Estudiante::create([
       'ci_estudiante' => $request->input('ci'),
       'complemento' => $request->input('comple'),
@@ -63,7 +91,7 @@ class EstudianteController extends Controller
       'departamento' => $request->input('departamento'),
       'provincia' => $request->input('provincia'),
       'localidad' => $request->input('localidad'),
-      'cod_asegurado' => $request->input('codAsegurado'),
+      'cod_asegurado' => $codAsegurado,
     ]);
     // Crear mensaje
     session()->flash('message', 'Registro exitoso');

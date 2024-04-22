@@ -107,23 +107,22 @@ session_start();
         </select>
       </div>
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Pais</label>
-        <input type="text" class="form-control" id="pais" name="pais" value="<?php echo $estudiante->pais ?>">
         <select name="pais" id="pais" class="form-control">
           <?php
-  foreach($universidades as $key=>$value){
-    if($estudiante->id_universidad==$value->id_universidad){
+          foreach($paises as $paisKey=>$paisValue){
+            if($estudiante->id_pais==$paisValue->id_pais){
           ?>
-          <option value="<?php echo $value->id_universidad;?>" selected><?php echo $value->nombre_universidad;?></option>
+          <option value="<?php echo $paisValue->id_pais;?>" selected><?php echo $paisValue->nombre_pais;?></option>
           <?php
-    }else{
+            }else{
           ?>
-          <option value="<?php echo $value->id_universidad;?>"><?php echo $value->nombre_universidad;?></option>
+          <option value="<?php echo $paisValue->id_pais;?>"><?php echo $paisValue->nombre_pais;?></option>
           <?php
-    }
+            }
+          }
 
-  }
           ?>
         </select>
       </div>

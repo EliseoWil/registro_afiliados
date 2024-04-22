@@ -13,15 +13,15 @@ session_start();
   <div class="modal-body pb-0 mb-0">
 
     <div class="row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="">Nombres</label>
         <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese sus nombres">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Apellido Paterno</label>
         <input type="text" class="form-control" id="ap_paterno" name="ap_paterno" placeholder="Apellido Paterno">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Apellido Materno</label>
         <input type="text" class="form-control" id="ap_materno" name="ap_materno" placeholder="Apellido Paterno">
       </div>
@@ -45,16 +45,16 @@ session_start();
         <label for="">R. U.</label>
         <input type="text" class="form-control" id="ru" name="ru" placeholder="Registro Universitario">
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <label for="">Curso</label>
         <input type="text" class="form-control" id="curso" name="curso" placeholder="Nombre de Curso">
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="">Género</label>
         <select name="sexo" id="sexo" class="form-control">
-          <option value="1">Masculino</option>
-          <option value="2">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
         </select>
       </div>
 
@@ -62,7 +62,7 @@ session_start();
         <label for="">Celular</label>
         <input type="text" class="form-control" id="celular" name="celular" placeholder="Telefono / Celular">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Estado Civil</label>
         <select name="estadoCivil" id="estadoCivil" class="form-control">
           <option value="">-- Seleccionar --</option>
@@ -72,7 +72,7 @@ session_start();
           <option value="Viudo(a)">Viudo(a)</option>
         </select>
       </div>
-      <div class="form-group col-md-5">
+      <div class="form-group col-md-4">
         <label for="">Universidad</label>
         <select name="universidad" id="universidad" class="form-control">
           <option value="">-- Seleccionar --</option>
@@ -85,12 +85,8 @@ session_start();
           ?>
         </select>
       </div>
-      <div class="form-group col-md-4">
-        <label for="">COD. Asegurado</label>
-        <input type="text" class="form-control bg-secondary" id="codAsegurado" name="codAsegurado" placeholder="Código de Asegurado" value="codigo1234">
-      </div>
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Pais</label>
         <select class="form-control" id="pais" name="pais">
           <option value="">-- Seleccionar --</option>
@@ -103,7 +99,7 @@ session_start();
           ?>
         </select>
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Departamento</label>
         <select class="form-control" id="departamento" name="departamento">
           <option value="">-- Seleccionar --</option>
@@ -116,7 +112,7 @@ session_start();
           ?>
         </select>
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Provincia</label>
         <select class="form-control" id="provincia" name="provincia">
           <option value="">-- Seleccionar --</option>
@@ -130,7 +126,7 @@ session_start();
         </select>
       </div>
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Localidad</label>
         <select class="form-control" id="localidad" name="localidad">
           <option value="">-- Seleccionar --</option>
@@ -143,11 +139,11 @@ session_start();
           ?>
         </select>
       </div>
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-6">
         <label for="">Dirección</label>
         <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese su Dirección de domicilio Actual">
       </div>
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-6">
         <label for="">Observación</label>
         <textarea class="form-control" name="observacion" id="observacion" cols="30" rows="2" placeholder="Ingrese la observación"></textarea>
       </div>
@@ -166,6 +162,14 @@ session_start();
     $('#FormRegEstudiante').validate({
       rules: {
         nombres: {
+          required: true,
+          minlength: 3
+        },
+        ap_paterno: {
+          required: true,
+          minlength: 3
+        },
+        ap_materno: {
           required: true,
           minlength: 3
         },
@@ -188,6 +192,9 @@ session_start();
           required: true,
           minlength: 6
         },
+        nacimiento: {
+          required: true
+        }
       },
       errorElement: 'span',
       errorPlacement: function(error, element) {
