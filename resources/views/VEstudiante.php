@@ -16,11 +16,11 @@
                     <th>Nombres</th>
                     <th>Reg. Universitario</th>
                     <th>Curso</th>
-                    <th>Estado Civil</th>
+                    <th>cod. Asegurado</th>
                     <th>Pais</th>
                     <th>Universidad</th>
                     <td>
-                        <button class="btn btn-primary" onclick="MNuevoEstudiante()"><i class="fas fa-plus"></i> Nuevo Registro</button>
+                        <button class="btn btn-primary" onclick="MNuevoEstudiante()"><i class="fas fa-plus"></i> Nuevo</button>
                     </td>
                 </tr>
             </thead>
@@ -35,9 +35,9 @@
                         <td><?php echo $estudiante['nombre_estu'] . " " . $estudiante['ap_paterno_estu'] . " " . $estudiante['ap_materno_estu'] ?></td>
                         <td><?php echo $estudiante['ru'] ?></td>
                         <td><?php echo $estudiante['curso'] ?></td>
-                        <td><?php echo $estudiante['estado_civil'] ?></td>
-                        <td><?php echo $estudiante['pais'] ?></td>
-                        <td><?php echo $estudiante['id_universidad'] ?></td>
+                        <td><?php echo $estudiante['cod_asegurado'] ?></td>
+                        <td><?php echo $estudiante['nombre_pais'] ?></td>
+                        <td><?php echo $estudiante['nombre_universidad'] ?></td>
                         <td>
                             <div class="btn-group text-sm ">
                                 <button class="btn btn-sm btn-info rounded-pill mr-1" onclick="MVerEstudiante(<?php echo $estudiante['id_estudiante'] ?>)">

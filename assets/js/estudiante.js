@@ -17,7 +17,8 @@ function MVerEstudiante(id) {
       type: "GET",
       url: "ver-estudiante/" + id,
       success: function (data) {
-          $("#content-lg").html(data);
+          //$("#content-lg").html(data);
+        console.log(data)
       }
   });
 }

@@ -11,7 +11,8 @@ class EstudianteController extends Controller
 
   public function index()
   {
-    $estudiantes = Estudiante::all();
+    $estudiante = new Estudiante();
+    $estudiantes = $estudiante->listaEstudiantes();
 
     echo view('asideMenu');
     echo view('VEstudiante', [
@@ -57,7 +58,7 @@ class EstudianteController extends Controller
       "11"=>61,
       "12"=>62
     );
-    
+
     if($request->input('sexo')=="Masculino"){
       $codAsegurado=$nacimiento[2].$nacimiento[3]."-".$nacimiento[5].$nacimiento[6].$nacimiento[8].$nacimiento[9]."-".$apPat[0].$apMat[0].$nombre[0];
     }else{
@@ -70,7 +71,7 @@ class EstudianteController extends Controller
       }
       $codAsegurado=$nacimiento[2].$nacimiento[3]."-".$mes.$nacimiento[8].$nacimiento[9]."-".$apPat[0].$apMat[0].$nombre[0];
     }
-    
+
     Estudiante::create([
       'ci_estudiante' => $request->input('ci'),
       'complemento' => $request->input('comple'),
@@ -101,9 +102,11 @@ class EstudianteController extends Controller
 
   public function show($id)
   {
-    $estudiante = Estudiante::find($id);
+    $estudiante = new Estudiante();
+    $VerEstudiante = $estudiante->verEstudiantes($id);
+
     return view('estudiante.FVerEstudiante', [
-      'estudiante' => $estudiante
+      'estudiante' => $VerEstudiante
     ]);
   }
 
