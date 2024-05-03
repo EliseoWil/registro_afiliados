@@ -4,24 +4,27 @@ session_start();
 ?>
 <form action="editar-estudiante" method="POST" id="FormEditEstudiante">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
-  <div class="modal-header bg-dark">
-    <h4 class="modal-title">REGISTRO NUEVO ESTUDIANTE</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <div class="modal-header bg-dark flex">
+    <h4 class="modal-title">ACTUALIZAR INFORMACION ESTUDIANTE </h4>
+    <h4 class="modal-title">COD.: <?php echo $estudiante->cod_asegurado;?></h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin:-1rem -1rem -1rem;">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body pb-0 mb-0">
+
     <div class="row">
-      <input type="hidden" class="form-control" id="id_estudiante" name="id_estudiante" value="<?php echo $estudiante->id_estudiante ?>">
-      <div class="form-group col-md-6">
+      <input type="hidden" id="id_estudiante" name="id_estudiante" value="<?php echo $estudiante->id_estudiante ?>">
+      <input type="hidden" id="codAsegurado" name="codAsegurado" value="<?php echo $estudiante->cod_asegurado ?>">
+      <div class="form-group col-md-4">
         <label for="">Nombres</label>
         <input type="text" class="form-control" id="nombres" name="nombres" value="<?php echo $estudiante->nombre_estu ?>">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Apellido Paterno</label>
         <input type="text" class="form-control" id="ap_paterno" name="ap_paterno" value="<?php echo $estudiante->ap_paterno_estu ?>">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Apellido Materno</label>
         <input type="text" class="form-control" id="ap_materno" name="ap_materno" value="<?php echo $estudiante->ap_materno_estu ?>">
       </div>
@@ -45,16 +48,16 @@ session_start();
         <label for="">R. U.</label>
         <input type="text" class="form-control" id="ru" name="ru" value="<?php echo $estudiante->ru ?>" readonly>
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <label for="">Curso</label>
         <input type="text" class="form-control" id="curso" name="curso" value="<?php echo $estudiante->curso ?>">
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="">Género</label>
         <select name="sexo" id="sexo" class="form-control">
-          <option value="1" <?php if($estudiante->sexo_estu=="Masculino"):?>selected<?php endif;?>>Masculino</option>
-          <option value="2" <?php if($estudiante->sexo_estu=="Femenino"):?>selected<?php endif;?>>Femenino</option>
+          <option value="Masculino" <?php if($estudiante->sexo_estu=="Masculino"):?>selected<?php endif;?>>Masculino</option>
+          <option value="Femenino" <?php if($estudiante->sexo_estu=="Femenino"):?>selected<?php endif;?>>Femenino</option>
         </select>
       </div>
 
@@ -62,7 +65,7 @@ session_start();
         <label for="">Celular</label>
         <input type="text" class="form-control" id="celular" name="celular" value="<?php echo $estudiante->contactos_estu ?>">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Estado Civil</label>
         <?php
   $estado_civil=array(
@@ -87,7 +90,7 @@ session_start();
 
         </select>
       </div>
-      <div class="form-group col-md-5">
+      <div class="form-group col-md-4">
         <label for="">Universidad</label>
         <select name="universidad" id="universidad" class="form-control">
           <?php
@@ -126,30 +129,77 @@ session_start();
           ?>
         </select>
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Departamento</label>
-        <input type="text" class="form-control" id="departamento" name="departamento" value="<?php echo $estudiante->departamento ?>">
+        <select name="departamento" id="departamento" class="form-control">
+          <?php
+          foreach($departamentos as $departamentoKey=>$departamentoValue){
+            if($estudiante->departamento==$departamentoValue->id_departamento){
+          ?>
+          <option value="<?php echo $departamentoValue->id_departamento;?>" selected><?php echo $departamentoValue->nombre_departamento;?></option>
+          <?php
+            }else{
+          ?>
+          <option value="<?php echo $departamentoValue->id_departamento;?>"><?php echo $departamentoValue->nombre_departamento;?></option>
+          <?php
+            }
+          }
+
+          ?>
+        </select>
+
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Provincia</label>
-        <input type="text" class="form-control" id="provincia" name="provincia" value="<?php echo $estudiante->provincia ?>">
+        <select name="provincia" id="provincia" class="form-control">
+          <?php
+          foreach($provincias as $provinciaKey=>$provinciaValue){
+            if($estudiante->provincia==$provinciaValue->id_provincia){
+          ?>
+          <option value="<?php echo $provinciaValue->id_provincia;?>" selected><?php echo $provinciaValue->nombre_provincia;?></option>
+          <?php
+            }else{
+          ?>
+          <option value="<?php echo $provinciaValue->id_provincia;?>"><?php echo $provinciaValue->nombre_provincia;?></option>
+          <?php
+            }
+          }
+
+          ?>
+        </select>
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="">Localidad</label>
-        <input type="text" class="form-control" id="localidad" name="localidad" value="<?php echo $estudiante->localidad ?>">
+        <select name="localidad" id="localidad" class="form-control">
+          <?php
+          foreach($localidades as $localidadKey=>$localidadValue){
+            if($estudiante->localidad==$localidadValue->id_localidad){
+          ?>
+          <option value="<?php echo $localidadValue->id_localidad;?>" selected><?php echo $localidadValue->nombre_localidad;?></option>
+          <?php
+            }else{
+          ?>
+          <option value="<?php echo $localidadValue->id_localidad;?>"><?php echo $localidadValue->nombre_localidad;?></option>
+          <?php
+            }
+          }
+
+          ?>
+        </select>
+
       </div>
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-6">
         <label for="">Dirección</label>
         <input type="text" class="form-control" id="direccion" name="direccion" value="<?php echo $estudiante->direccion_estu ?>">
       </div>
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-6">
         <label for="">Observación</label>
         <textarea class="form-control" name="observacion" id="observacion" cols="30" rows="2"><?php echo $estudiante->observacion ?></textarea>
       </div>
     </div>
 
     <div class="modal-footer justify-content-between">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      
       <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 
@@ -159,15 +209,41 @@ session_start();
 <script>
   $(function() {
     $('#FormEditEstudiante').validate({
-      rules: {
+       rules: {
         nombres: {
           required: true,
           minlength: 3
+        },
+        ap_paterno: {
+          required: true,
+          minlength: 3
+        },
+        ap_materno: {
+          required: true,
+          minlength: 3
+        },
+        pais: {
+          required: true
+        },
+        localidad: {
+          required: true
+        },
+        provincia: {
+          required: true
+        },
+        universidad: {
+          required: true
+        },
+        departamento: {
+          required: true
         },
         ci: {
           required: true,
           minlength: 6
         },
+        nacimiento: {
+          required: true
+        }
       },
       errorElement: 'span',
       errorPlacement: function(error, element) {

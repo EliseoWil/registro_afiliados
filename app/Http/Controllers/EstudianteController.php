@@ -99,7 +99,6 @@ class EstudianteController extends Controller
     return redirect()->back();
   }
 
-
   public function show($id)
   {
     $estudiante = new Estudiante();
@@ -109,7 +108,6 @@ class EstudianteController extends Controller
       'estudiante' => $VerEstudiante
     ]);
   }
-
 
   public function editEstudiante(String $id)
   {
@@ -167,24 +165,11 @@ class EstudianteController extends Controller
 
   public function eliminarEstudiante($id)
   {
-    return view('estudiante.FEliEstudiante', compact('id'));
-  }
-  //
-  public function destroy(string $id)
-  {
+
     $persona = Estudiante::find($id);
-    $persona->delete();
-    session()->flash('eliminado', 'Registro eliminado exitosamente');
-    echo '<script>
-            Swal.fire({
-                icon: "success",
-                showConfirmButton: false,
-                title: "El Registro fue eliminado exitosamente",
-                timer: 2000,
-            });
-            setTimeout(function() {
-                location.reload()
-            }, 2000);
-          </script>';
+    if($persona->delete()){
+      echo "ok";
+    }
   }
+
 }

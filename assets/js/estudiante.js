@@ -17,34 +17,41 @@ function MVerEstudiante(id) {
       type: "GET",
       url: "ver-estudiante/" + id,
       success: function (data) {
-          //$("#content-lg").html(data);
-        console.log(data)
+          $("#content-lg").html(data);
       }
   });
 }
 
 function MEliEstudiante(id) {
-  $("#modal-default").modal("show");
 
-  $.ajax({
-      type: "GET",
-      url: "eliminarEstudiante/" + id,
-      success: function (data) {
-          $("#content-default").html(data);
-      }
-  });
-}
+  Swal.fire({
+    title:"Estas seguro de eliminar este estudiante?",
+    showDenyButton:true,
+    showCancelButton:false,
+    confirmButtonText:'Confirmar',
+    denyButtonText:'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      $.ajax({
+        type:"GET",
+        url: "eliminarEstudiante/" + id,
+        success:function(data){
 
-function EliminarEstudiante(id) {
-  $("#modal-default").modal("show");
-
-  $.ajax({
-      type: "GET",
-      url: "eliminar-estudiante/" + id,
-      success: function (data) {
-          $("#content-default").html(data);
-      }
-  });
+          if(data=="ok"){
+            location.reload()
+          }else{
+            Swal.fire({
+              icon: 'error',
+              showConfirmButton: false,
+              title: 'Error',
+              text:'El estudiante no puede ser eliminado',
+              timer: 1000
+            })
+          }
+        }
+      })
+    }
+  })
 }
 
 function MEditEstudiante(id) {
