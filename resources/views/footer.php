@@ -46,6 +46,7 @@
 <!-- SweetAlert2 -->
 <script src="assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="assets/js/estudiante.js"></script>
+<script src="assets/js/empleado.js"></script>
 <script src="assets/js/persona.js"></script>
 <script src="assets/js/usuario.js"></script>
 

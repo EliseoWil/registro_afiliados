@@ -199,7 +199,7 @@ session_start();
     </div>
 
     <div class="modal-footer justify-content-between">
-      
+
       <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 
@@ -209,7 +209,7 @@ session_start();
 <script>
   $(function() {
     $('#FormEditEstudiante').validate({
-       rules: {
+      rules: {
         nombres: {
           required: true,
           minlength: 3

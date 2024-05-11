@@ -35,4 +35,11 @@ class MEmpleado extends Model
         'localidad',
         'cod_asegurado'
     ];
+  
+    public function listaEmpleados(){
+    return $this->select('cod_asegurado','id_empleado','nombre_empleado','ap_paterno','ap_materno','fecha_ingreso_laboral','nombre_empresa','cargo')
+      ->join('empresa', 'empresa.id_empresa', '=', 'empleado.id_empresa')
+      ->get();
+
+  }
 }

@@ -53,12 +53,13 @@ Route::post('/editar-estudiante', [EstudianteController::class, 'update'])->name
 
 //RUTAS PARA EMPLEADOS
 Route::get('/VEmpleado', [EmpleadoController::class, 'index']);
-/*Route::get('/nuevo-estudiante', [EstudianteController::class, 'nuevoEstudiante'])->name('nuevo-estudiante');
-Route::post('/crear-estudiante', [EstudianteController::class, 'store'])->name('estudiante.store');
-Route::get('/ver-estudiante/{id}', [EstudianteController::class, 'show'])->name('estudiante.show');
+Route::get('/nuevo-empleado', [EmpleadoController::class, 'nuevoEmpleado'])->name('nuevo-empleado');
+Route::post('/crear-empleado', [EmpleadoController::class, 'regEmpleado'])->name('crear-empleado');
+Route::get('/edit-empleado/{id}', [EmpleadoController::class, 'FEditEmpleado'])->name('formEditEmpleado');
+/*Route::get('/ver-estudiante/{id}', [EstudianteController::class, 'show'])->name('estudiante.show');
 Route::get('/eliminarEstudiante/{id}', [EstudianteController::class, 'eliminarEstudiante'])->name('estudiante.eliminarEstudiante');
 Route::get('/eliminar-estudiante/{id}', [EstudianteController::class, 'destroy'])->name('estudiante.destroy');
-Route::get('/edit-estudiante/{id}', [EstudianteController::class, 'editEstudiante'])->name('estudiante.edit');
+
 Route::post('/editar-estudiante', [EstudianteController::class, 'update'])->name('estudiante.update');*/
 
 // rutas para personas
