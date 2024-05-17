@@ -6,7 +6,7 @@
 </div>
 
 <div class="modal-body pt-0">
-<hr>
+  <hr>
   <div class="row">
     <div class="col-7">
       <h2 class="lead text-lg" style="font-weight: 800;"><b><?php echo $estudiante['nombre_estu'] . " " . $estudiante['ap_paterno_estu'] . " " . $estudiante['ap_materno_estu'] ?></b></h2>
@@ -27,6 +27,11 @@
       <p class="text-muted text-md mb-0 pb-0"><b>Provincia: </b> <?php echo $estudiante['nombre_provincia'] ?></p>
       <p class="text-muted text-md mb-0 pb-0"><b>Localidad: </b> <?php echo $estudiante['nombre_localidad'] ?></p>
       <p class="text-muted text-md mb-0 pb-0"><b>Observación: </b> <?php echo $estudiante['observacion'] ?></p>
+
+      <a class="btn btn-success" href="ImpCarnet/<?php echo $estudiante['id_estudiante'];?>" target="_blank">
+       Imprimir Carnet
+        <i class="fas fa-print"></i>
+      </a>
     </div>
   </div>
 

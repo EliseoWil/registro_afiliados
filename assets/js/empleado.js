@@ -15,7 +15,7 @@ function MVerEmpleado(id) {
 
   $.ajax({
       type: "GET",
-      url: "ver-Empleado/" + id,
+      url: "verEmpleado/" + id,
       success: function (data) {
           $("#content-lg").html(data);
       }

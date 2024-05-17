@@ -29,7 +29,8 @@ session_start();
                 <select name="rolUsuario" id="rolUsuario" class="form-control">
                     <option value="null">Seleccionar</option>
                     <option value="Administrador">Administrador</option>
-                    <option value="Otro">Otro</option>
+                    <option value="Consultor">Consultor</option>
+                    <option value="Gestor">Gestor</option>
                 </select>
             </div>
 

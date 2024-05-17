@@ -22,16 +22,15 @@ session_start();
 
       <div class="form-group col-md-6">
         <label>Login Usuario</label>
-        <input type="text" class="form-control" id="login" name="login" value="<?php echo $usuario->login_usuario ?>">
+        <input type="text" class="form-control"  id="login" name="login" value="<?php echo $usuario->login_usuario ?>">
       </div>
 
       <div class="form-group col-md-6">
         <label>Rol de Usuario</label>
         <select name="rolUsuario" id="rolUsuario" class="form-control">
-          <option value="<?php echo $usuario->rol_usuario ?>"><?php echo $usuario->rol_usuario ?></option>
-          <option value="null">Seleccionar</option>
-          <option value="Administrador">Administrador</option>
-          <option value="Otro">Otro</option>
+          <option value="Administrador" <?php if($usuario->rol_usuario=="Administrador"):?>selected<?php endif;?>>Administrador</option>
+          <option value="Consultor" <?php if($usuario->rol_usuario=="Consultor"):?>selected<?php endif;?>>Consultor</option>
+          <option value="Gestor" <?php if($usuario->rol_usuario=="Gestor"):?>selected<?php endif;?>>Gestor</option>
         </select>
       </div>
 

@@ -35,13 +35,13 @@
                         <td><?php echo $value['cargo']; ?></td>
                         <td>
                             <div class="btn-group text-sm ">
-                                <button class="btn btn-sm btn-info rounded-pill mr-1" onclick="MVerEstudiante(<?php echo $value['id_empleado'] ?>)">
+                                <button class="btn btn-sm btn-info rounded-pill mr-1" onclick="MVerEmpleado(<?php echo $value['id_empleado'] ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button class="btn btn-secondary btn-sm rounded-pill mr-1" onclick="MEditEmpleado(<?php echo $value['id_empleado'] ?>)">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn btn-danger btn-sm rounded-pill mr-1" onclick="MEliEstudiante(<?php echo $value['id_empleado'] ?>)">
+                                <button class="btn btn-danger btn-sm rounded-pill mr-1" onclick="MEliEmpleado(<?php echo $value['id_empleado'] ?>)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>

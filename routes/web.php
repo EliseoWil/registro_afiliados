@@ -19,10 +19,10 @@ use App\Http\Controllers\EmpleadoController;
 use Illuminate\Support\Facades\Auth;
 //default route
 Route::get('/', function () {
-    return view('login');
+  return view('login');
 });
 Route::get('/login', function () {
-    return view('login');
+  return view('login');
 });
 //solicitud de acceso desde login
 Route::post('/acceso', [usuarioController::class, 'ctrIngresoUsuario']);
@@ -56,11 +56,9 @@ Route::get('/VEmpleado', [EmpleadoController::class, 'index']);
 Route::get('/nuevo-empleado', [EmpleadoController::class, 'nuevoEmpleado'])->name('nuevo-empleado');
 Route::post('/crear-empleado', [EmpleadoController::class, 'regEmpleado'])->name('crear-empleado');
 Route::get('/edit-empleado/{id}', [EmpleadoController::class, 'FEditEmpleado'])->name('formEditEmpleado');
-/*Route::get('/ver-estudiante/{id}', [EstudianteController::class, 'show'])->name('estudiante.show');
-Route::get('/eliminarEstudiante/{id}', [EstudianteController::class, 'eliminarEstudiante'])->name('estudiante.eliminarEstudiante');
-Route::get('/eliminar-estudiante/{id}', [EstudianteController::class, 'destroy'])->name('estudiante.destroy');
-
-Route::post('/editar-estudiante', [EstudianteController::class, 'update'])->name('estudiante.update');*/
+Route::post('/editar-empleado', [EmpleadoController::class, 'editEmpleado'])->name('editEmpleado');
+Route::get('/eliminarEmpleado/{id}', [EmpleadoController::class, 'eliminarEmpleado']);
+Route::get('/verEmpleado/{id}', [EmpleadoController::class, 'verEmpleado']);
 
 // rutas para personas
 Route::get('/VPersona', [PersonaController::class, 'index'])->name('persona.index');
@@ -71,3 +69,6 @@ Route::get('/eliminarPersona/{id}', [PersonaController::class, 'eliminarPersona'
 Route::get('/eliminar-persona/{id}', [PersonaController::class, 'destroy'])->name('persona.destroy');
 Route::get('/edit-persona/{id}', [PersonaController::class, 'editPersona'])->name('persona.edit');
 Route::post('/editar-persona', [PersonaController::class, 'updatePersona'])->name('persona.update');
+
+//impresion carnet
+Route::get('/ImpCarnet/{id}', [EstudianteController::class, 'ImpCarnet']);

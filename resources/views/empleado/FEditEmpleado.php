@@ -2,7 +2,7 @@
 $token = session()->token();
 session_start();
 ?>
-<form action="editar-empleado" method="POST" id="FormRegEmpleado">
+<form action="editar-empleado" method="POST" id="FormEditEmpleado">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
   <div class="modal-header bg-dark">
     <h4 class="modal-title">ACTUALIZAR EMPLEADO</h4>
@@ -17,6 +17,7 @@ session_start();
       <div class="form-group col-md-4">
         <label for="">Nombre(s)</label>
         <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese sus nombres" value="<?php echo $empleado->nombre_empleado;?>">
+        <input type="hidden" id="idEmpleado" name="idEmpleado" value="<?php echo $empleado->id_empleado;?>">
       </div>
       <div class="form-group col-md-4">
         <label for="">Apellido Paterno</label>
@@ -197,7 +198,7 @@ session_start();
       </div>
       <div class="form-group col-md-6">
         <label for="">Dirección</label>
-        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese su Dirección de domicilio Actual" <?php echo $empleado->direccion;?>>
+        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese su Dirección de domicilio Actual" value="<?php echo $empleado->direccion;?>">
       </div>
 
     </div>
@@ -212,7 +213,7 @@ session_start();
 
 <script>
   $(function() {
-    $('#FormRegEmpleado').validate({
+    $('#FormEditEmpleado').validate({
       rules: {
         nombres: {
           required: true,

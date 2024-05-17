@@ -101,9 +101,9 @@ class EmpleadoController extends Controller
     session()->flash('message', 'Registro exitoso');
     return redirect()->back();
   }
-  
+
   public function FEditEmpleado(String $id){
-    
+
     $empleado = MEmpleado::find($id);
     $empresas = DB::table('empresa')->get();
     $departamentos = DB::table('departamento')->get();
@@ -117,6 +117,55 @@ class EmpleadoController extends Controller
       "provincias"=>$provincias,
       "paises"=>$paises,
       "localidades"=>$localidades
+    ]);
+  }
+
+  public function editEmpleado(Request $request){
+    $id=$request->input("idEmpleado");
+    $empleado = MEmpleado::find($id);
+
+
+    $empleado->nombre_empleado = $request->input('nombres');
+    $empleado->ap_paterno = $request->input('ap_paterno');
+    $empleado->ap_materno = $request->input('ap_materno');
+    $empleado->ci_empleado = $request->input('ci');
+    $empleado->complemento = $request->input('comple');
+    $empleado->lugar_emision = $request->input('emision');
+    $empleado->direccion = $request->input('direccion');      
+    $empleado->fecha_nacimiento = $request->input('nacimiento');
+    $empleado->cargo = $request->input('cargo');
+    $empleado->profesion = $request->input('profesion');
+    $empleado->salario = $request->input('salario');
+    $empleado->fecha_ingreso_laboral = $request->input('fechaIngreso');
+    $empleado->sexo = $request->input('sexo');
+    $empleado->estado_civil = $request->input('estadoCivil');
+    $empleado->contactos_empleado = $request->input('contacto');
+    $empleado->id_empresa = $request->input('empresa');
+    $empleado->pais = $request->input('pais');
+    $empleado->departamento = $request->input('departamento');
+    $empleado->provincia = $request->input('provincia');
+    $empleado->localidad = $request->input('localidad');
+    $empleado->save();
+
+    session()->flash('actualizado', 'Registro actualizado exitosamente');
+    return redirect()->back();
+  }
+
+  public function eliminarEmpleado($id)
+  {
+
+    $empleado = MEmpleado::find($id);
+    if($empleado->delete()){
+      echo "ok";
+    }
+  }
+
+  public function verEmpleado($id){
+    $MEmpleado = new MEmpleado();
+    $empleado = $MEmpleado->verEmpleado($id);
+    
+    return view('empleado.FVerEmpleado', [
+      'empleado' => $empleado
     ]);
   }
 

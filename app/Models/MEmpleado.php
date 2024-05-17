@@ -42,4 +42,19 @@ class MEmpleado extends Model
       ->get();
 
   }
+  
+   public function verEmpleado($id){
+   $resultado= $this->select('id_empleado', 'ci_empleado', 'complemento', 'lugar_emision','nombre_empleado','ap_paterno','ap_materno','cod_asegurado','nombre_pais','fecha_nacimiento','estado_civil','sexo','direccion','contactos_empleado','nombre_departamento','nombre_provincia','nombre_localidad', 'nombre_empresa', 'cargo', 'profesion', 'salario', 'fecha_ingreso_laboral')
+      
+      ->join('pais', 'pais.id_pais', '=', 'empleado.pais')
+      ->join('empresa', 'empresa.id_empresa', '=', 'empleado.id_empresa')
+      ->join('departamento', 'departamento.id_departamento', '=' ,'empleado.departamento')
+      ->join('localidad', 'localidad.id_localidad', '=', 'empleado.localidad')
+      ->join('provincia', 'provincia.id_provincia', '=', 'empleado.provincia')
+      
+      ->where('id_empleado', $id)
+      ->get()->toArray();
+
+    return reset($resultado);
+  }
 }

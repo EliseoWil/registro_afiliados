@@ -47,7 +47,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Inicio</a>
+          <a href="panel" class="nav-link">Inicio</a>
         </li>
       </ul>
 
@@ -118,14 +118,14 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
+<!--            <li class="nav-item">
               <a href="VPersona" class="nav-link">
                 <i class="nav-icon  fas fa-people-arrows"></i>
                 <p>
                   Personas
                 </p>
               </a>
-            </li>
+            </li>-->
             <li class="nav-header">OPCIONES</li>
             <li class="nav-item">
               <a href="salir" class="nav-link">

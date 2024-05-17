@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use FPDF;
 
 class EstudianteController extends Controller
 {
@@ -127,11 +128,6 @@ class EstudianteController extends Controller
     ]);
   }
 
-  public function edit(Estudiante $estudiante)
-  {
-    //
-  }
-
   public function update(Request $request, Estudiante $estudiante)
   {
     $id = $request->id_estudiante;
@@ -170,6 +166,55 @@ class EstudianteController extends Controller
     if($persona->delete()){
       echo "ok";
     }
+  }
+
+  public function ImpCarnet($id){
+    
+    $estudiante = Estudiante::find($id);
+    
+    require_once "app/fpdf/fpdf.php";
+
+    $pdf = new FPDF();
+    $pdf->AddPage();
+
+    // Establecer el fondo anverso
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/ci_asegurado_fro.jpg', 20, 20, 160, 80);
+
+
+    // Título
+    $pdf->SetFont('Arial', 'B', 12);
+
+
+    // datos
+    $pdf->SetXY(80,45.5);
+    $pdf->Cell(50, 10, $estudiante->nombre_estu." ".$estudiante->ap_paterno_estu." ".$estudiante->ap_materno_estu, 0, 0, 'L');
+
+    $pdf->SetXY(80,50.5);
+    $pdf->Cell(50, 10, $estudiante->ru, 0, 0, 'L');
+
+    $pdf->SetXY(80,55.5);
+    $pdf->Cell(50, 10, $estudiante->ap_paterno_estu, 0, 0, 'L');
+
+    $pdf->SetXY(80,60.5);
+    $pdf->Cell(60, 10, $estudiante->observacion, 0, 0, 'L');
+
+    $pdf->SetXY(80,65.5);
+    $pdf->Cell(50, 10, $estudiante->ap_paterno_estu, 0, 0, 'L');
+
+    
+        // Establecer el fondo reverso
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_rev.jpg', 20, 105, 160, 80);
+
+
+
+
+    // Enviar encabezados para indicar al navegador que debe abrir el PDF en una nueva pestaña
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: inline; filename="carnet.pdf"');
+
+    // Generar y mostrar el PDF en línea en una nueva pestaña
+    $pdf->Output('I');
+    exit;
   }
 
 }
