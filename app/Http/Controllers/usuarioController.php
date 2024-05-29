@@ -21,23 +21,33 @@ class usuarioController extends Controller
     echo view('panelInicio');
     echo view('footer');
   }
-  
-    public function ctrIngresoUsuario()
+
+  public function ctrIngresoUsuario()
   {
-   
+
     $usuario = $_POST['login_usuario'];
     $password = $_POST['password_usuario'];
 
     $usuarioEncontrado = User::where('login_usuario', $usuario)->first();
 
     if ($usuarioEncontrado && Hash::check($password, $usuarioEncontrado->password_usuario)) {
+
+      //variables de sesion
+      session(
+        ["id_usuario"=>$usuarioEncontrado->id_usuario,
+         "login"=>$usuario,
+         "nombre_usuario"=>$usuarioEncontrado->nombre_usuario,
+         "rol"=>$usuarioEncontrado->rol_usuario,
+         "estado_usuario"=>$usuarioEncontrado->estado_usuario]
+      );
+
       return redirect('/panel');
     } else {
       Session::flash('mensaje', ['credenciales' => 'Credenciales de acceso inválidas']);
       return redirect('/login');
     }
   }
-  
+
   public function ctrInfoUsuarios()
   {
     $users = User::all();
@@ -127,7 +137,7 @@ class usuarioController extends Controller
   public function destroy(string $id)
   {
     $usuario = User::find($id);
-    
+
     if($usuario->delete()==true){
       echo "ok";
     }
