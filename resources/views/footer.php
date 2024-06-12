@@ -45,10 +45,56 @@
 <script src="assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- SweetAlert2 -->
 <script src="assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+<?php
+if (session('actualizado')) {
+?>
+    <script>
+        Swal.fire({
+            icon: "success",
+            showConfirmButton: false,
+            title: "El Registro fue actualizado exitosamente",
+            timer: 2000,
+        });
+    </script>;
+<?php
+}
+?>
+
+<?php
+if (session('message')) {
+?>
+<script>
+  Swal.fire({
+    icon: 'success',
+    showConfirmButton: false,
+    title: 'El Registro fue creado exitosamente',
+    timer: 2500
+  })
+</script>
+<?php
+}
+?>
+
+<?php
+if (session('actualizado')) {
+?>
+<script>
+  Swal.fire({
+    icon: "success",
+    showConfirmButton: false,
+    title: "El Registro fue actualizado exitosamente",
+    timer: 2000,
+  });
+</script>;
+<?php
+}
+?>
 <script src="assets/js/estudiante.js"></script>
 <script src="assets/js/empleado.js"></script>
 <script src="assets/js/persona.js"></script>
 <script src="assets/js/usuario.js"></script>
+<script src="assets/js/empresa.js"></script>
 
 <!--====================
 seccion de modals

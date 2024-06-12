@@ -80,7 +80,7 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-              <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+              <img src="assets/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
               <a href="#" class="d-block">Administrador</a>
@@ -119,22 +119,34 @@ with font-awesome or any other icon font library -->
                   </p>
                 </a>
               </li>
+              
               <li class="nav-item">
                 <a href="VEmpleado" class="nav-link">
                   <i class="nav-icon fa fa-user-secret"></i>
                   <p>
-                    Empleados
+                    Asegurado
                   </p>
                 </a>
               </li>
-              <!--            <li class="nav-item">
-<a href="VPersona" class="nav-link">
-<i class="nav-icon  fas fa-people-arrows"></i>
-<p>
-Personas
-</p>
-</a>
-</li>-->
+              
+               <li class="nav-item">
+                <a href="VPersona" class="nav-link">
+                  <i class="nav-icon  fas fa-people-arrows"></i>
+                  <p>
+                    Beneficiario
+                  </p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="VEmpresa" class="nav-link">
+                  <i class="nav-icon  fas fa-building"></i>
+                  <p>
+                    Empresa
+                  </p>
+                </a>
+              </li>
+              
               <li class="nav-header">OPCIONES</li>
               <li class="nav-item">
                 <a href="salir" class="nav-link">

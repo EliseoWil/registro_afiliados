@@ -5,6 +5,7 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\EmpresaControlador;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,14 @@ Route::get('/eliminarPersona/{id}', [PersonaController::class, 'eliminarPersona'
 Route::get('/eliminar-persona/{id}', [PersonaController::class, 'destroy'])->name('persona.destroy');
 Route::get('/edit-persona/{id}', [PersonaController::class, 'editPersona'])->name('persona.edit');
 Route::post('/editar-persona', [PersonaController::class, 'updatePersona'])->name('persona.update');
+
+// rutas para empresa
+Route::get('/VEmpresa', [EmpresaControlador::class, 'index']);
+Route::get('/MNuevaEmpresa', [EmpresaControlador::class, 'MNuevaEmpresa']);
+Route::post('/regEmpresa', [EmpresaControlador::class, 'regEmpresa']);
+Route::get('/MEditEmpresa/{id}', [EmpresaControlador::class, 'MEditEmpresa']);
+Route::post('/editEmpresa/{id}', [EmpresaControlador::class, 'editEmpresa']);
+Route::get('/eliminarEmpresa/{id}', [EmpresaControlador::class, 'eliminarEmpresa']);
 
 //impresion carnet
 Route::get('/ImpCarnet/{id}', [EstudianteController::class, 'ImpCarnet']);
