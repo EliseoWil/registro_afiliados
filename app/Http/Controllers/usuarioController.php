@@ -89,22 +89,12 @@ class usuarioController extends Controller
     return redirect()->back();
   }
 
-  public function show(User $User)
-  {
-    //
-  }
-
   public function editUsuario(String $id)
   {
     $usuario = User::find($id);
     return view('usuario.FEditUsuario', [
       'usuario' => $usuario
     ]);
-  }
-
-  public function edit(User $User)
-  {
-    //
   }
 
   public function update(Request $request, User $usuario)

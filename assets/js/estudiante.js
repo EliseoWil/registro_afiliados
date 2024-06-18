@@ -2,11 +2,11 @@ function MNuevoEstudiante() {
   $("#modal-xl").modal("show");
 
   $.ajax({
-      type: "GET",
-      url: "nuevo-estudiante",
-      success: function (data) {
-          $("#content-xl").html(data);
-      }
+    type: "GET",
+    url: "nuevo-estudiante",
+    success: function (data) {
+      $("#content-xl").html(data);
+    }
   });
 }
 
@@ -14,11 +14,11 @@ function MVerEstudiante(id) {
   $("#modal-lg").modal("show");
 
   $.ajax({
-      type: "GET",
-      url: "ver-estudiante/" + id,
-      success: function (data) {
-          $("#content-lg").html(data);
-      }
+    type: "GET",
+    url: "ver-estudiante/" + id,
+    success: function (data) {
+      $("#content-lg").html(data);
+    }
   });
 }
 
@@ -58,10 +58,67 @@ function MEditEstudiante(id) {
   $("#modal-xl").modal("show");
 
   $.ajax({
-      type: "GET",
-      url: "edit-estudiante/" + id,
-      success: function (data) {
-          $("#content-xl").html(data);
-      }
+    type: "GET",
+    url: "edit-estudiante/" + id,
+    success: function (data) {
+      $("#content-xl").html(data);
+    }
   });
+}
+
+function MCarnetSeguroEst(id){
+  $("#modal-lg").modal("show");
+
+  $.ajax({
+    type: "GET",
+    url: "MFormCarnet/" + id,
+    success: function (data) {
+      $("#content-lg").html(data);
+    }
+  });
+}
+
+function MEditCarnetEst(cod){
+  $("#modal-lg").modal("show");
+
+  $.ajax({
+    type: "GET",
+    url: "MEditCarnetEstu/" + cod,
+    success: function (data) {
+      $("#content-lg").html(data);
+    }
+  });
+}
+
+function previsualizar(){
+  let imagen=document.getElementById("imgEstudiante").files[0]
+
+  if(imagen["type"]!="image/png" && imagen["type"]!="image/jpeg"){
+
+    $("#imgEstudiante").val("")
+
+    Swal.fire({
+      icon: 'error',
+      showConfirmButton: false,
+      title: 'El archivo no es JPG o PNG',
+    })
+  }else if(imagen["size"]>10000000){
+    $("#imgEstudiante").val("")
+
+    Swal.fire({
+      icon: 'error',
+      showConfirmButton: false,
+      title: 'El archivo no puede ser mayor a 10MB',
+    })
+
+  }else{
+
+    let datosImagen= new FileReader
+    datosImagen.readAsDataURL(imagen)
+
+    $(datosImagen).on("load", function(event){
+      let rutaImagen=event.target.result
+      $(".previsualizar").attr("src", rutaImagen)
+    })
+  }
 }

@@ -46,8 +46,8 @@ session_start();
         <input type="text" class="form-control" id="ru" name="ru" placeholder="Registro Universitario">
       </div>
       <div class="form-group col-md-3">
-        <label for="">Curso</label>
-        <input type="text" class="form-control" id="curso" name="curso" placeholder="Nombre de Curso">
+        <label for="">Carrera</label>
+        <input type="text" class="form-control" id="curso" name="curso" placeholder="Nombre de Carrera">
       </div>
 
       <div class="form-group col-md-3">

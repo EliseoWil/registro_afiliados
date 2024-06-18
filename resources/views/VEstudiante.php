@@ -17,7 +17,6 @@
           <th>Reg. Universitario</th>
           <th>Curso</th>
           <th>cod. Asegurado</th>
-          <th>Pais</th>
           <th>Universidad</th>
           <td>
             <?php
@@ -42,7 +41,6 @@
           <td><?php echo $estudiante['ru'] ?></td>
           <td><?php echo $estudiante['curso'] ?></td>
           <td><?php echo $estudiante['cod_asegurado'] ?></td>
-          <td><?php echo $estudiante['nombre_pais'] ?></td>
           <td><?php echo $estudiante['nombre_universidad'] ?></td>
           <td>
             <div class="btn-group text-sm ">
@@ -60,9 +58,11 @@
               <button class="btn btn-danger btn-sm rounded-pill mr-1" onclick="MEliEstudiante(<?php echo $estudiante['id_estudiante'] ?>)">
                 <i class="fas fa-trash"></i>
               </button>
+            
               <?php
           }
               ?>
+
             </div>
           </td>
         </tr>

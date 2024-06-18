@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\MEmpleado;
+use App\Models\Carnet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use FPDF;
+
 class EmpleadoController extends Controller
 {
 
@@ -163,10 +166,132 @@ class EmpleadoController extends Controller
   public function verEmpleado($id){
     $MEmpleado = new MEmpleado();
     $empleado = $MEmpleado->verEmpleado($id);
-    
+
     return view('empleado.FVerEmpleado', [
       'empleado' => $empleado
     ]);
+  }
+
+  /*=============
+  carnet
+  =============*/
+  public function MFormCarnetEmp($id){
+    $empleado = MEmpleado::find($id);
+    return view('empleado.FNuevoCarnetEmp',[
+      "empleado"=>$empleado
+    ]);
+  }
+
+  public function regCarnetEmp(Request $request, $cod){
+
+    //cargar imagen
+    if($request->file('imgEmpleado')!=null){
+      $imagen=$request->file('imgEmpleado');
+      $imgNombre= $imagen->getClientOriginalName();
+      $imgTmp=$imagen->getRealPath();
+      $imagen->move("./assets/dist/img/empleado/", $imgNombre);
+    }else{
+      $imgNombre="";
+    }
+
+
+    Carnet::create([
+      'fecha_emision' => $request->input('fechaEmision'),
+      'fecha_vencimiento' => $request->input('fechaVencimiento'),
+      'gestion' => $request->input('gestion'),
+      'fotografia' => $imgNombre,
+      'cod_asegurado' => $cod
+    ]);
+
+    session()->flash('message', 'Registro exitoso');
+    return redirect()->back();
+  }
+
+  public function ImpCarnet($id)
+  {
+    $MEmpleado = new MEmpleado();
+    $Empleado = $MEmpleado->verEmpleado($id);
+
+    $carnet=Carnet::where('cod_asegurado', $Empleado["cod_asegurado"])->first();
+
+    require_once "app/fpdf/fpdf.php";
+
+    $pdf = new FPDF();
+    $pdf->AddPage();
+
+    // Establecer el fondo anverso en la primera página
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_fro.jpg', 20, 20, 160, 80);
+
+    // Título
+    $pdf->SetFont('Arial', 'B', 12);
+
+    // datos
+
+    $pdf->SetXY(77, 47);
+    $pdf->Cell(50, 10, $Empleado["ci_empleado"], 0, 0, 'L');
+
+    $pdf->SetXY(60, 56);
+    $pdf->Cell(50, 10, $Empleado["nombre_empleado"]." ".$Empleado["ap_paterno"], 0, 0, 'L');
+
+
+    $pdf->SetXY(60, 80);
+    $pdf->Cell(50, 10, $carnet["gestion"], 0, 0, 'L');
+
+    //imagen para la fotografia
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/Empleado/'.$carnet["fotografia"], 127, 59, 40, 30);
+
+    // Agregar una nueva página para la segunda imagen
+    $pdf->AddPage();
+
+    // Establecer el fondo reverso en la segunda página
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_rev.jpg', 20, 20, 160, 80);
+
+    $pdf->SetXY(60, 34);
+    $pdf->Cell(50, 10, $carnet["fecha_emision"], 0, 0, 'L');
+
+    $pdf->SetXY(115, 34);
+    $pdf->Cell(50, 10, $carnet["fecha_vencimiento"], 0, 0, 'L');
+    // Enviar encabezados para indicar al navegador que debe abrir el PDF en una nueva pestaña
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: inline; filename="carnet.pdf"');
+
+    // Generar y mostrar el PDF en línea en una nueva pestaña
+    $pdf->Output('I');
+    exit;
+  }
+
+  public function MEditCarnetEmp($cod){
+    $carnet = Carnet::where('cod_asegurado', $cod)->first();
+
+    return view('empleado.FEditCarnetEmp',[
+      "carnet"=>$carnet
+    ]);
+  }
+
+  public function editCarnetEmp(Request $request, $cod){
+
+    $carnet = Carnet::where('cod_asegurado', $cod)->first();
+
+    //cargar imagen
+    if($request->file('imgEmpleado')!=null){
+      $imagen=$request->file('imgEmpleado');
+      $imgNombre= $imagen->getClientOriginalName();
+      $imgTmp=$imagen->getRealPath();
+      $imagen->move("./assets/dist/img/empleado/", $imgNombre);
+    }else{
+      $imgNombre=$request->input('imgEmpleadoActual');
+    }
+
+    $carnet->fecha_emision  = $request->input('fechaEmision');
+    $carnet->fecha_vencimiento  = $request->input('fechaVencimiento');
+    $carnet->gestion  = $request->input('gestion');
+    $carnet->fotografia  = $imgNombre;
+    $carnet->estado_carnet  = $request->input('estadoCarnet');
+
+    $carnet->save();
+
+    session()->flash('actualizado', 'Registro actualizado exitosamente');
+    return redirect()->back();
   }
 
 }

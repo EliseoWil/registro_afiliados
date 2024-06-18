@@ -49,7 +49,7 @@ session_start();
         <input type="text" class="form-control" id="ru" name="ru" value="<?php echo $estudiante->ru ?>" readonly>
       </div>
       <div class="form-group col-md-3">
-        <label for="">Curso</label>
+        <label for="">Carrera</label>
         <input type="text" class="form-control" id="curso" name="curso" value="<?php echo $estudiante->curso ?>">
       </div>
 

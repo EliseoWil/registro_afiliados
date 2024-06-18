@@ -28,10 +28,30 @@
       <p class="text-muted text-md mb-0 pb-0"><b>Localidad: </b> <?php echo $estudiante['nombre_localidad'] ?></p>
       <p class="text-muted text-md mb-0 pb-0"><b>Observación: </b> <?php echo $estudiante['observacion'] ?></p>
 
+      <?php
+  if($estudiante['carnet_de_asegurado']==""){
+      ?>
+      <button class="btn btn-primary" onclick="MCarnetSeguroEst(<?php echo $estudiante['id_estudiante'] ?>)">
+        <i class="fas fa-id-card"> Registrar Carnet</i>
+      </button>
+      <?php
+  }else{
+      ?>
       <a class="btn btn-success" href="ImpCarnet/<?php echo $estudiante['id_estudiante'];?>" target="_blank">
-       Imprimir Carnet
+        Imprimir Carnet
         <i class="fas fa-print"></i>
       </a>
+
+      <button class="btn btn-secondary" onclick="MEditCarnetEst('<?php echo $estudiante['cod_asegurado'] ?>')">
+        <i class="fas fa-id-card"> Editar Carnet</i>
+      </button>
+      <?php
+  }
+      ?>
+
+
+
+
     </div>
   </div>
 

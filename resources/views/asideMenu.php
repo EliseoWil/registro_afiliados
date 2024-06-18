@@ -38,7 +38,6 @@
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-
       <!-- Navbar -->
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
@@ -90,8 +89,7 @@
           <!-- Sidebar Menu -->
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <!-- Add icons to the links using the .nav-icon class
-with font-awesome or any other icon font library -->
+
 
               <?php 
               if(session("rol")=="Administrador"){

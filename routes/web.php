@@ -51,6 +51,10 @@ Route::get('/eliminarEstudiante/{id}', [EstudianteController::class, 'eliminarEs
 Route::get('/eliminar-estudiante/{id}', [EstudianteController::class, 'destroy'])->name('estudiante.destroy');
 Route::get('/edit-estudiante/{id}', [EstudianteController::class, 'editEstudiante'])->name('estudiante.edit');
 Route::post('/editar-estudiante', [EstudianteController::class, 'update'])->name('estudiante.update');
+Route::get('/MFormCarnet/{id}', [EstudianteController::class, 'MFormCarnet']);
+Route::post('/regCarnetEst/{cod}', [EstudianteController::class, 'regCarnetEst']);
+Route::get('/MEditCarnetEstu/{cod}', [EstudianteController::class, 'MEditCarnetEstu']);
+Route::post('/editCarnetEst/{cod}', [EstudianteController::class, 'editCarnetEst']);
 
 //RUTAS PARA EMPLEADOS
 Route::get('/VEmpleado', [EmpleadoController::class, 'index']);
@@ -60,11 +64,16 @@ Route::get('/edit-empleado/{id}', [EmpleadoController::class, 'FEditEmpleado'])-
 Route::post('/editar-empleado', [EmpleadoController::class, 'editEmpleado'])->name('editEmpleado');
 Route::get('/eliminarEmpleado/{id}', [EmpleadoController::class, 'eliminarEmpleado']);
 Route::get('/verEmpleado/{id}', [EmpleadoController::class, 'verEmpleado']);
+Route::get('/MFormCarnetEmp/{id}', [EmpleadoController::class, 'MFormCarnetEmp']);
+Route::post('/regCarnetEmp/{cod}', [EmpleadoController::class, 'regCarnetEmp']);
+Route::get('/MEditCarnetEmp/{cod}', [EmpleadoController::class, 'MEditCarnetEmp']);
+Route::post('/editCarnetEmp/{cod}', [EmpleadoController::class, 'editCarnetEmp']);
+Route::get('/ImpCarnetEmp/{id}', [EmpleadoController::class, 'ImpCarnet']);
 
 // rutas para personas
 Route::get('/VPersona', [PersonaController::class, 'index'])->name('persona.index');
 Route::get('/nuevo-persona', [PersonaController::class, 'nuevoPersona'])->name('persona.nuevoPersona');
-Route::post('/crear-persona', [PersonaController::class, 'store'])->name('persona.store');
+Route::post('/crear-persona', [PersonaController::class, 'store']);
 Route::get('/ver-persona/{id}', [PersonaController::class, 'show'])->name('persona.show');
 Route::get('/eliminarPersona/{id}', [PersonaController::class, 'eliminarPersona'])->name('persona.eliminarPersona');
 Route::get('/eliminar-persona/{id}', [PersonaController::class, 'destroy'])->name('persona.destroy');

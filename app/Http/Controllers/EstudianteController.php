@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
+use App\Models\Carnet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use FPDF;
@@ -168,46 +169,92 @@ class EstudianteController extends Controller
     }
   }
 
-  public function ImpCarnet($id){
-    
+  /*==============
+  carnet
+  ===============*/
+  public function MFormCarnet($id){
     $estudiante = Estudiante::find($id);
+    return view('estudiante.FNuevoCarnetEst',[
+      "estudiante"=>$estudiante
+    ]);
+  }
+
+  public function regCarnetEst(Request $request, $cod){
+
+    //cargar imagen
+    if($request->file('imgEstudiante')!=null){
+      $imagen=$request->file('imgEstudiante');
+      $imgNombre= $imagen->getClientOriginalName();
+      $imgTmp=$imagen->getRealPath();
+      $imagen->move("./assets/dist/img/estudiante/", $imgNombre);
+    }else{
+      $imgNombre="";
+    }
+
+
+    Carnet::create([
+      'fecha_emision' => $request->input('fechaEmision'),
+      'fecha_vencimiento' => $request->input('fechaVencimiento'),
+      'gestion' => $request->input('gestion'),
+      'fotografia' => $imgNombre,
+      'cod_asegurado' => $cod
+    ]);
+
+    session()->flash('message', 'Registro exitoso');
+    return redirect()->back();
+  }
+
+  public function ImpCarnet($id)
+  {
+    $MEstudiante = new Estudiante();
+    $estudiante = $MEstudiante->InfoEstudiante($id);
     
+    $carnet=Carnet::where('cod_asegurado', $estudiante["cod_asegurado"])->first();
+
     require_once "app/fpdf/fpdf.php";
 
     $pdf = new FPDF();
     $pdf->AddPage();
 
-    // Establecer el fondo anverso
-    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/ci_asegurado_fro.jpg', 20, 20, 160, 80);
-
+    // Establecer el fondo anverso en la primera página
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_estudiante_A.jpg', 20, 20, 160, 80);
 
     // Título
     $pdf->SetFont('Arial', 'B', 12);
 
-
     // datos
-    $pdf->SetXY(80,45.5);
-    $pdf->Cell(50, 10, $estudiante->nombre_estu." ".$estudiante->ap_paterno_estu." ".$estudiante->ap_materno_estu, 0, 0, 'L');
+    $pdf->SetXY(40, 47);
+    $pdf->Cell(50, 10, $estudiante["ru"], 0, 0, 'L');
 
-    $pdf->SetXY(80,50.5);
-    $pdf->Cell(50, 10, $estudiante->ru, 0, 0, 'L');
+    $pdf->SetXY(77, 47);
+    $pdf->Cell(50, 10, $estudiante["ci_estudiante"], 0, 0, 'L');
 
-    $pdf->SetXY(80,55.5);
-    $pdf->Cell(50, 10, $estudiante->ap_paterno_estu, 0, 0, 'L');
+    $pdf->SetXY(60, 56);
+    $pdf->Cell(50, 10, $estudiante["nombre_estu"], 0, 0, 'L');
 
-    $pdf->SetXY(80,60.5);
-    $pdf->Cell(60, 10, $estudiante->observacion, 0, 0, 'L');
+    $pdf->SetXY(60, 64);
+    $pdf->Cell(50, 10, $estudiante["ap_paterno_estu"], 0, 0, 'L');
 
-    $pdf->SetXY(80,65.5);
-    $pdf->Cell(50, 10, $estudiante->ap_paterno_estu, 0, 0, 'L');
+    $pdf->SetXY(60, 72);
+    $pdf->Cell(50, 10, $estudiante["curso"], 0, 0, 'L');
 
+    $pdf->SetXY(60, 80);
+    $pdf->Cell(50, 10, $carnet["gestion"], 0, 0, 'L');
+
+    //imagen para la fotografia
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/estudiante/'.$carnet["fotografia"], 127, 59, 40, 30);
     
-        // Establecer el fondo reverso
-    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_rev.jpg', 20, 105, 160, 80);
+    // Agregar una nueva página para la segunda imagen
+    $pdf->AddPage();
 
+    // Establecer el fondo reverso en la segunda página
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_estudiante_B.jpg', 20, 20, 160, 80);
 
-
-
+    $pdf->SetXY(60, 34);
+    $pdf->Cell(50, 10, $carnet["fecha_emision"], 0, 0, 'L');
+    
+    $pdf->SetXY(115, 34);
+    $pdf->Cell(50, 10, $carnet["fecha_vencimiento"], 0, 0, 'L');
     // Enviar encabezados para indicar al navegador que debe abrir el PDF en una nueva pestaña
     header('Content-Type: application/pdf');
     header('Content-Disposition: inline; filename="carnet.pdf"');
@@ -215,6 +262,40 @@ class EstudianteController extends Controller
     // Generar y mostrar el PDF en línea en una nueva pestaña
     $pdf->Output('I');
     exit;
+  }
+
+  public function MEditCarnetEstu($cod){
+    $carnet = Carnet::where('cod_asegurado', $cod)->first();
+
+    return view('estudiante.FEditCarnetEst',[
+      "carnet"=>$carnet
+    ]);
+  }
+  
+  public function editCarnetEst(Request $request, $cod){
+    
+    $carnet = Carnet::where('cod_asegurado', $cod)->first();
+    
+    //cargar imagen
+    if($request->file('imgEstudiante')!=null){
+      $imagen=$request->file('imgEstudiante');
+      $imgNombre= $imagen->getClientOriginalName();
+      $imgTmp=$imagen->getRealPath();
+      $imagen->move("./assets/dist/img/estudiante/", $imgNombre);
+    }else{
+      $imgNombre=$request->input('imgEstudianteActual');
+    }
+
+    $carnet->fecha_emision  = $request->input('fechaEmision');
+    $carnet->fecha_vencimiento  = $request->input('fechaVencimiento');
+    $carnet->gestion  = $request->input('gestion');
+    $carnet->fotografia  = $imgNombre;
+    $carnet->estado_carnet  = $request->input('estadoCarnet');
+
+    $carnet->save();
+
+    session()->flash('actualizado', 'Registro actualizado exitosamente');
+    return redirect()->back();
   }
 
 }
