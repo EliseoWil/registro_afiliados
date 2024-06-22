@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Persona;
+use App\Models\Carnet;
+use App\Models\MEmpleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use FPDF;
@@ -37,7 +39,7 @@ class PersonaController extends Controller
 
   public function store(Request $request)
   {
-     $nombre=str_split(strtoupper($request->input('nombres')));
+    $nombre=str_split(strtoupper($request->input('nombres')));
     $apPat=str_split(strtoupper($request->input('ap_paterno')));
     $apMat=str_split(strtoupper($request->input('ap_materno')));
     $nacimiento=str_split($request->input('nacimiento'));
@@ -98,23 +100,36 @@ class PersonaController extends Controller
 
   public function show($id)
   {
-    $persona = Persona::find($id);
+
+    $persona = new Persona();
+    $VerPersona = $persona->verPersona($id);
     return view('persona.FVerPersona', [
-      'persona' => $persona
+      'persona' => $VerPersona
     ]);
   }
 
   public function editPersona(String $id)
   {
-    $persona = Persona::find($id);
+    $departamentos = DB::table('departamento')->get();
+    $provincias = DB::table('provincia')->get();
+    $localidades = DB::table('localidad')->get();
+    $paises = DB::table('pais')->get();
+
+    $persona = new Persona();
+    $VerPersona = $persona->verPersona($id);
+
     return view('persona.FEditPersona', [
-      'persona' => $persona
+      'persona' => $VerPersona,
+      "departamentos"=>$departamentos,
+      "provincias"=>$provincias,
+      "paises"=>$paises,
+      "localidades"=>$localidades
     ]);
   }
 
-  public function updatePersona(Request $request)
+  public function updatePersona($id, Request $request)
   {
-    $id = $request->id_persona;
+
     $persona = Persona::find($id);
 
     $persona->ci_persona  = $request->input('ci');
@@ -135,13 +150,12 @@ class PersonaController extends Controller
     $persona->departamento  = $request->input('departamento');
     $persona->provincia  = $request->input('provincia');
     $persona->localidad  = $request->input('localidad');
-    $persona->cod_asegurado  = $request->input('codAsegurado');
     $persona->save();
 
     session()->flash('actualizado', 'Registro actualizado exitosamente');
     return redirect()->back();
 
-    /* return $id; */
+
   }
 
   public function eliminarPersona($id)
@@ -152,18 +166,153 @@ class PersonaController extends Controller
   public function destroy(string $id)
   {
     $persona = Persona::find($id);
-    $persona->delete();
-    session()->flash('actualizado', 'Registro eliminado exitosamente');
-    echo '<script>
-            Swal.fire({
-                icon: "success",
-                showConfirmButton: false,
-                title: "El Registro fue eliminado exitosamente",
-                timer: 2000,
-            });
-            setTimeout(function() {
-                window.location.href = "/VPersona";
-            }, 2000);
-          </script>';
+
+    if($persona->delete()){
+      echo "ok";
+    }
+
   }
+
+  /*=============
+  carnet
+  =============*/
+  public function MFormCarnetPer($id)
+  {
+    $empleados = MEmpleado::all();
+    $persona = Persona::find($id);
+    return view('persona.FNuevoCarnetPer',[
+      "persona"=>$persona,
+      "empleados"=>$empleados
+    ]);
+  }
+
+  public function regCarnetPer(Request $request, $cod)
+  {
+
+    //cargar imagen
+    if($request->file('imgPersona')!=null){
+      $imagen=$request->file('imgPersona');
+      $imgNombre= $imagen->getClientOriginalName();
+      $imgTmp=$imagen->getRealPath();
+      $imagen->move("./assets/dist/img/persona/", $imgNombre);
+    }else{
+      $imgNombre="";
+    }
+
+    echo $request->input('beneficiario');
+    Carnet::create([
+      'fecha_emision' => $request->input('fechaEmision'),
+      'fecha_vencimiento' => $request->input('fechaVencimiento'),
+      'gestion' => $request->input('gestion'),
+      'fotografia' => $imgNombre,
+      'cod_asegurado' => $cod,
+      'cod_asegurado_prov' => $request->input('beneficiario')
+    ]);
+
+    session()->flash('message', 'Registro exitoso');
+    return redirect()->back();
+  }
+
+  public function ImpCarnet($id)
+  {
+    $MPersona = new Persona();
+    $persona = $MPersona->verPersona($id);
+
+    $carnet=Carnet::where('cod_asegurado', $persona["cod_asegurado"])->first();
+
+    require_once "app/fpdf/fpdf.php";
+
+    $pdf = new FPDF();
+    $pdf->AddPage();
+
+    // Establecer el fondo anverso en la primera página
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_beneficiario_A.jpg', 20, 20, 160, 80);
+
+    // Título
+    $pdf->SetFont('Arial', 'B', 12);
+
+    // datos
+
+
+    $pdf->SetXY(75, 46);
+    $pdf->Cell(50, 10, $persona["nombre_persona"]." ".$persona["ap_paterno"], 0, 0, 'L');
+
+    $pdf->SetXY(75, 51);
+    $pdf->Cell(50, 10, $persona["carnet_de_asegurado"], 0, 0, 'L');
+
+    $pdf->SetXY(75, 55);
+    $pdf->Cell(50, 10, $persona["grupo"], 0, 0, 'L');
+
+
+    //imagen para la fotografia
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/persona/'.$carnet["fotografia"], 139, 48, 33, 25);
+
+    // Agregar una nueva página para la segunda imagen
+    $pdf->AddPage();
+
+    // Establecer el fondo reverso en la segunda página
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_beneficiario_B.jpg', 20, 20, 160, 80);
+
+/*    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->SetXY(85, 20.5);
+    $pdf->Cell(50, 10, $persona["nombre_persona"]." ".$Empleado["ap_paterno"], 0, 0, 'L');
+
+    $pdf->SetXY(85, 25.5);
+    $pdf->Cell(50, 10, $persona["carnet_de_asegurado"], 0, 0, 'L');
+
+    $pdf->SetXY(85, 31);
+    $pdf->Cell(50, 10, $persona["nombre_empresa"], 0, 0, 'L');*/
+
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->SetXY(58, 31);
+    $pdf->Cell(50, 10, $carnet["fecha_emision"], 0, 0, 'L');
+
+    $pdf->SetXY(125, 31);
+    $pdf->Cell(50, 10, $carnet["fecha_vencimiento"], 0, 0, 'L');
+    // Enviar encabezados para indicar al navegador que debe abrir el PDF en una nueva pestaña
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: inline; filename="carnet.pdf"');
+
+    // Generar y mostrar el PDF en línea en una nueva pestaña
+    $pdf->Output('I');
+    exit;
+  }
+
+  public function MEditCarnetPer($cod){
+    $carnet = Carnet::where('cod_asegurado', $cod)->first();
+    $empleados = MEmpleado::all();
+    
+    return view('persona.FEditCarnetPer',[
+      "carnet"=>$carnet,
+      "empleados"=>$empleados
+    ]);
+  }
+
+  public function editCarnetPer(Request $request, $cod){
+
+    $carnet = Carnet::where('cod_asegurado', $cod)->first();
+
+    //cargar imagen
+    if($request->file('imgPersona')!=null){
+      $imagen=$request->file('imgPersona');
+      $imgNombre= $imagen->getClientOriginalName();
+      $imgTmp=$imagen->getRealPath();
+      $imagen->move("./assets/dist/img/persona/", $imgNombre);
+    }else{
+      $imgNombre=$request->input('imgPersonaActual');
+    }
+
+    $carnet->fecha_emision  = $request->input('fechaEmision');
+    $carnet->fecha_vencimiento  = $request->input('fechaVencimiento');
+    $carnet->gestion  = $request->input('gestion');
+    $carnet->fotografia  = $imgNombre;
+    $carnet->estado_carnet  = $request->input('estadoCarnet');
+    $carnet->cod_asegurado_prov  = $request->input('beneficiario');
+
+    $carnet->save();
+
+    session()->flash('actualizado', 'Registro actualizado exitosamente');
+    return redirect()->back();
+  }
+
 }

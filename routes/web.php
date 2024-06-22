@@ -74,11 +74,16 @@ Route::get('/ImpCarnetEmp/{id}', [EmpleadoController::class, 'ImpCarnet']);
 Route::get('/VPersona', [PersonaController::class, 'index'])->name('persona.index');
 Route::get('/nuevo-persona', [PersonaController::class, 'nuevoPersona'])->name('persona.nuevoPersona');
 Route::post('/crear-persona', [PersonaController::class, 'store']);
-Route::get('/ver-persona/{id}', [PersonaController::class, 'show'])->name('persona.show');
-Route::get('/eliminarPersona/{id}', [PersonaController::class, 'eliminarPersona'])->name('persona.eliminarPersona');
-Route::get('/eliminar-persona/{id}', [PersonaController::class, 'destroy'])->name('persona.destroy');
-Route::get('/edit-persona/{id}', [PersonaController::class, 'editPersona'])->name('persona.edit');
-Route::post('/editar-persona', [PersonaController::class, 'updatePersona'])->name('persona.update');
+Route::get('/ver-persona/{id}', [PersonaController::class, 'show']);
+Route::get('/eliminarPersona/{id}', [PersonaController::class, 'eliminarPersona']);
+Route::get('/eliminar-persona/{id}', [PersonaController::class, 'destroy']);
+Route::get('/edit-persona/{id}', [PersonaController::class, 'editPersona']);
+Route::post('/editar-persona/{id}', [PersonaController::class, 'updatePersona']);
+Route::get('/MFormCarnetPer/{id}', [PersonaController::class, 'MFormCarnetPer']);
+Route::post('/regCarnetPer/{cod}', [PersonaController::class, 'regCarnetPer']);
+Route::get('/MEditCarnetPer/{cod}', [PersonaController::class, 'MEditCarnetPer']);
+Route::post('/editCarnetPer/{cod}', [PersonaController::class, 'editCarnetPer']);
+Route::get('/ImpCarnetPer/{id}', [PersonaController::class, 'ImpCarnet']);
 
 // rutas para empresa
 Route::get('/VEmpresa', [EmpresaControlador::class, 'index']);

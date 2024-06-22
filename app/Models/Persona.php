@@ -33,4 +33,46 @@ class Persona extends Model
         'localidad',
         'cod_asegurado'
     ];
+  
+  public function verPersona($id){
+    
+    $resultado = $this->select(
+      'persona.id_persona', 
+      'persona.ci_persona', 
+      'persona.complemento', 
+      'persona.lugar_emision', 
+      'persona.nombre_persona', 
+      'persona.ap_paterno', 
+      'persona.ap_materno',
+      'persona.direccion', 
+      'persona.cod_asegurado', 
+      'pais.nombre_pais',
+      'persona.fecha_nacimiento',
+      'persona.factor',
+      'persona.grupo',
+      'persona.estado_civil_pers', 
+      'persona.sexo', 
+      'persona.datos_referencia', 
+      'persona.contactos_persona', 
+      'pais.nombre_pais', 
+      'departamento.nombre_departamento', 
+      'provincia.nombre_provincia', 
+      'localidad.nombre_localidad', 
+      'carnet_seguro.cod_asegurado AS carnet_de_asegurado'
+    )
+      ->leftJoin('pais', 'pais.id_pais', '=', 'persona.pais')
+      ->leftJoin('departamento', 'departamento.id_departamento', '=', 'persona.departamento')
+      ->leftJoin('localidad', 'localidad.id_localidad', '=', 'persona.localidad')
+      ->leftJoin('provincia', 'provincia.id_provincia', '=', 'persona.provincia')
+      ->leftJoin('carnet_seguro', 'carnet_seguro.cod_asegurado', '=', 'persona.cod_asegurado')
+      ->where('persona.id_persona', $id)
+      ->get()
+      ->toArray();
+
+    if (!empty($resultado)) {
+      return $resultado[0];
+    }
+
+    return null;
+  }
 }

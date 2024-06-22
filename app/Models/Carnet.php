@@ -20,7 +20,8 @@ class Carnet extends Model
     'gestion',
     'fotografia',
     'cod_asegurado',
-    'estado_carnet'
+    'estado_carnet',
+    'cod_asegurado_prov'
   ];
 
 }

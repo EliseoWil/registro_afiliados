@@ -175,14 +175,16 @@ class EmpleadoController extends Controller
   /*=============
   carnet
   =============*/
-  public function MFormCarnetEmp($id){
+  public function MFormCarnetEmp($id)
+  {
     $empleado = MEmpleado::find($id);
     return view('empleado.FNuevoCarnetEmp',[
       "empleado"=>$empleado
     ]);
   }
 
-  public function regCarnetEmp(Request $request, $cod){
+  public function regCarnetEmp(Request $request, $cod)
+  {
 
     //cargar imagen
     if($request->file('imgEmpleado')!=null){
@@ -220,36 +222,52 @@ class EmpleadoController extends Controller
     $pdf->AddPage();
 
     // Establecer el fondo anverso en la primera página
-    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_fro.jpg', 20, 20, 160, 80);
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_A.jpg', 20, 20, 160, 80);
 
     // Título
     $pdf->SetFont('Arial', 'B', 12);
 
     // datos
 
-    $pdf->SetXY(77, 47);
+    /*
+    $pdf->SetXY(75, 47);
     $pdf->Cell(50, 10, $Empleado["ci_empleado"], 0, 0, 'L');
+*/
 
-    $pdf->SetXY(60, 56);
+    $pdf->SetXY(75, 46);
     $pdf->Cell(50, 10, $Empleado["nombre_empleado"]." ".$Empleado["ap_paterno"], 0, 0, 'L');
 
+    $pdf->SetXY(75, 51);
+    $pdf->Cell(50, 10, $Empleado["carnet_de_asegurado"], 0, 0, 'L');
 
-    $pdf->SetXY(60, 80);
-    $pdf->Cell(50, 10, $carnet["gestion"], 0, 0, 'L');
+    $pdf->SetXY(75, 65.5);
+    $pdf->Cell(50, 10, $Empleado["nombre_empresa"], 0, 0, 'L');
+
 
     //imagen para la fotografia
-    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/Empleado/'.$carnet["fotografia"], 127, 59, 40, 30);
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/Empleado/'.$carnet["fotografia"], 139, 48, 33, 25);
 
     // Agregar una nueva página para la segunda imagen
     $pdf->AddPage();
 
     // Establecer el fondo reverso en la segunda página
-    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_rev.jpg', 20, 20, 160, 80);
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_B.jpg', 20, 20, 160, 80);
 
-    $pdf->SetXY(60, 34);
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->SetXY(85, 20.5);
+    $pdf->Cell(50, 10, $Empleado["nombre_empleado"]." ".$Empleado["ap_paterno"], 0, 0, 'L');
+
+    $pdf->SetXY(85, 25.5);
+    $pdf->Cell(50, 10, $Empleado["carnet_de_asegurado"], 0, 0, 'L');
+
+    $pdf->SetXY(85, 31);
+    $pdf->Cell(50, 10, $Empleado["nombre_empresa"], 0, 0, 'L');
+
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->SetXY(58, 37);
     $pdf->Cell(50, 10, $carnet["fecha_emision"], 0, 0, 'L');
 
-    $pdf->SetXY(115, 34);
+    $pdf->SetXY(125, 37);
     $pdf->Cell(50, 10, $carnet["fecha_vencimiento"], 0, 0, 'L');
     // Enviar encabezados para indicar al navegador que debe abrir el PDF en una nueva pestaña
     header('Content-Type: application/pdf');
