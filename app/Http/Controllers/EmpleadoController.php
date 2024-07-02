@@ -202,7 +202,8 @@ class EmpleadoController extends Controller
       'fecha_vencimiento' => $request->input('fechaVencimiento'),
       'gestion' => $request->input('gestion'),
       'fotografia' => $imgNombre,
-      'cod_asegurado' => $cod
+      'cod_asegurado' => $cod,
+      'cod_asegurado_prov' => $cod
     ]);
 
     session()->flash('message', 'Registro exitoso');
@@ -253,7 +254,7 @@ class EmpleadoController extends Controller
     // Establecer el fondo reverso en la segunda página
     $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_asegurado_B.jpg', 20, 20, 160, 80);
 
-    $pdf->SetFont('Arial', 'B', 8);
+ /*   $pdf->SetFont('Arial', 'B', 8);
     $pdf->SetXY(85, 20.5);
     $pdf->Cell(50, 10, $Empleado["nombre_empleado"]." ".$Empleado["ap_paterno"], 0, 0, 'L');
 
@@ -261,13 +262,13 @@ class EmpleadoController extends Controller
     $pdf->Cell(50, 10, $Empleado["carnet_de_asegurado"], 0, 0, 'L');
 
     $pdf->SetXY(85, 31);
-    $pdf->Cell(50, 10, $Empleado["nombre_empresa"], 0, 0, 'L');
+    $pdf->Cell(50, 10, $Empleado["nombre_empresa"], 0, 0, 'L');*/
 
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->SetXY(58, 37);
+    $pdf->SetXY(58, 31);
     $pdf->Cell(50, 10, $carnet["fecha_emision"], 0, 0, 'L');
 
-    $pdf->SetXY(125, 37);
+    $pdf->SetXY(125, 31);
     $pdf->Cell(50, 10, $carnet["fecha_vencimiento"], 0, 0, 'L');
     // Enviar encabezados para indicar al navegador que debe abrir el PDF en una nueva pestaña
     header('Content-Type: application/pdf');

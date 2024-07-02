@@ -42,7 +42,7 @@ session_start();
             <div class="input-group">
               <div class="custom-file">
                
-                <input type="file" class="custom-file-input" id="imgEstudiante" name="imgEstudiante" onchange="previsualizar()" id="imgEstudiante" name="imgEstudiante">
+                <input type="file" class="custom-file-input" id="imgEstudiante" name="imgEstudiante" onchange="previsualizarEstu()" id="imgEstudiante" name="imgEstudiante">
                 <input type="hidden" id="imgEstudianteActual" name="imgEstudianteActual" value="<?php echo $carnet->fotografia;?>">
                 <label class="custom-file-label" for="imgEstudiante">Elegir archivo</label>
               </div>

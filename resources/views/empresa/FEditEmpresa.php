@@ -5,7 +5,7 @@ $token = session()->token();
 <form action="editEmpresa/<?php echo $Empresa["id_empresa"];?>" method="POST" id="FormEditEmpresa">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
   <div class="modal-header bg-dark">
-    <h4 class="modal-title">ACTUALIZAR DATOS EMPRESA</h4>
+    <h4 class="modal-title">ACTUALIZAR DATOS EMPRESA/INSTITUCION</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

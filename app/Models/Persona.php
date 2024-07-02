@@ -58,7 +58,12 @@ class Persona extends Model
       'departamento.nombre_departamento', 
       'provincia.nombre_provincia', 
       'localidad.nombre_localidad', 
-      'carnet_seguro.cod_asegurado AS carnet_de_asegurado'
+      'carnet_seguro.cod_asegurado AS carnet_de_asegurado',
+      'carnet_seguro.cod_asegurado_prov',
+      'carnet_seguro.fotografia',
+      'carnet_seguro.fecha_emision',
+      'carnet_seguro.fecha_vencimiento'
+      
     )
       ->leftJoin('pais', 'pais.id_pais', '=', 'persona.pais')
       ->leftJoin('departamento', 'departamento.id_departamento', '=', 'persona.departamento')

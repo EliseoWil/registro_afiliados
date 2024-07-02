@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Persona;
 use App\Models\Carnet;
 use App\Models\MEmpleado;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use FPDF;
@@ -215,10 +216,15 @@ class PersonaController extends Controller
 
   public function ImpCarnet($id)
   {
+    //datos del beneficiario
     $MPersona = new Persona();
     $persona = $MPersona->verPersona($id);
+    
+    //datos del empleado
+/*    $MEmpleado = new MEmpleado();
+    $empleado = $MEmpleado->verPersona($id);*/
 
-    $carnet=Carnet::where('cod_asegurado', $persona["cod_asegurado"])->first();
+    $empleado=MEmpleado::where('cod_asegurado', $persona["cod_asegurado_prov"])->first();
 
     require_once "app/fpdf/fpdf.php";
 
@@ -233,7 +239,6 @@ class PersonaController extends Controller
 
     // datos
 
-
     $pdf->SetXY(75, 46);
     $pdf->Cell(50, 10, $persona["nombre_persona"]." ".$persona["ap_paterno"], 0, 0, 'L');
 
@@ -245,7 +250,7 @@ class PersonaController extends Controller
 
 
     //imagen para la fotografia
-    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/persona/'.$carnet["fotografia"], 139, 48, 33, 25);
+    $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/persona/'.$persona["fotografia"], 139, 48, 33, 25);
 
     // Agregar una nueva página para la segunda imagen
     $pdf->AddPage();
@@ -253,22 +258,26 @@ class PersonaController extends Controller
     // Establecer el fondo reverso en la segunda página
     $pdf->Image('http://localhost/registro_afiliados/assets/dist/img/carnet_beneficiario_B.jpg', 20, 20, 160, 80);
 
-/*    $pdf->SetFont('Arial', 'B', 8);
+
+    $pdf->SetFont('Arial', 'B', 8);
     $pdf->SetXY(85, 20.5);
-    $pdf->Cell(50, 10, $persona["nombre_persona"]." ".$Empleado["ap_paterno"], 0, 0, 'L');
+    $pdf->Cell(50, 10, $empleado["nombre_empleado"]." ".$empleado["ap_paterno"]." ".$empleado["ap_materno"], 0, 0, 'L');
 
     $pdf->SetXY(85, 25.5);
-    $pdf->Cell(50, 10, $persona["carnet_de_asegurado"], 0, 0, 'L');
+    $pdf->Cell(50, 10, $empleado["cod_asegurado"], 0, 0, 'L');
 
-    $pdf->SetXY(85, 31);
-    $pdf->Cell(50, 10, $persona["nombre_empresa"], 0, 0, 'L');*/
+    //datos de la empresa
+    $empresa = Empresa::find($empleado["id_empresa"]);
+    $pdf->SetXY(85, 30.5);
+    $pdf->Cell(50, 10, $empresa["nombre_empresa"], 0, 0, 'L');
+
 
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->SetXY(58, 31);
-    $pdf->Cell(50, 10, $carnet["fecha_emision"], 0, 0, 'L');
+    $pdf->SetXY(58, 38);
+    $pdf->Cell(50, 10, $persona["fecha_emision"], 0, 0, 'L');
 
-    $pdf->SetXY(125, 31);
-    $pdf->Cell(50, 10, $carnet["fecha_vencimiento"], 0, 0, 'L');
+    $pdf->SetXY(125, 38);
+    $pdf->Cell(50, 10, $persona["fecha_vencimiento"], 0, 0, 'L');
     // Enviar encabezados para indicar al navegador que debe abrir el PDF en una nueva pestaña
     header('Content-Type: application/pdf');
     header('Content-Disposition: inline; filename="carnet.pdf"');

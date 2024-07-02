@@ -7,7 +7,7 @@
   </section>
 
   <section class="content">
-    <h4>Lista de Personas</h4>
+    <h4>Lista de Beneficiarios</h4>
     <table id="DataTablePersona" class="table table-bordered table-striped">
       <thead>
         <tr>

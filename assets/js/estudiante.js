@@ -90,7 +90,7 @@ function MEditCarnetEst(cod){
   });
 }
 
-function previsualizar(){
+function previsualizarEstu(){
   let imagen=document.getElementById("imgEstudiante").files[0]
 
   if(imagen["type"]!="image/png" && imagen["type"]!="image/jpeg"){

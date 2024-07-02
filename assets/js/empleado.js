@@ -94,7 +94,7 @@ function MEditCarnetEmp(cod){
   });
 }
 
-function previsualizar(){
+function previsualizarEmp(){
   let imagen=document.getElementById("imgEmpleado").files[0]
 
   if(imagen["type"]!="image/png" && imagen["type"]!="image/jpeg"){

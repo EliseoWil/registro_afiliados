@@ -197,7 +197,8 @@ class EstudianteController extends Controller
       'fecha_vencimiento' => $request->input('fechaVencimiento'),
       'gestion' => $request->input('gestion'),
       'fotografia' => $imgNombre,
-      'cod_asegurado' => $cod
+      'cod_asegurado' => $cod,
+      'cod_asegurado_prov' => $cod
     ]);
 
     session()->flash('message', 'Registro exitoso');

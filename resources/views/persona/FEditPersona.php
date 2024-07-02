@@ -6,7 +6,7 @@ session_start();
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
 
   <div class="modal-header bg-dark">
-    <h4 class="modal-title">EDITAR DATOS DE PERSONA</h4>
+    <h4 class="modal-title">EDITAR DATOS DE BENEFICIARIO</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

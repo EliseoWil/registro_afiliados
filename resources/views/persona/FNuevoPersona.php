@@ -5,7 +5,7 @@ session_start();
 <form action="crear-persona" method="POST" id="FormRegPersona">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
   <div class="modal-header bg-dark">
-    <h4 class="modal-title">REGISTRO NUEVA PERSONA</h4>
+    <h4 class="modal-title">REGISTRO NUEVO BENEFICIARIO</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

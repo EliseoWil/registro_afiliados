@@ -5,7 +5,7 @@ session_start();
 <form action="regEmpresa" method="POST" id="FormRegEmpresa">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
   <div class="modal-header bg-dark">
-    <h4 class="modal-title">REGISTRO NUEVA EMPRESA</h4>
+    <h4 class="modal-title">REGISTRO NUEVA EMPRESA/INSTITUCION</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

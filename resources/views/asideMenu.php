@@ -140,7 +140,7 @@
                 <a href="VEmpresa" class="nav-link">
                   <i class="nav-icon  fas fa-building"></i>
                   <p>
-                    Empresa
+                    Empresa/Institucion
                   </p>
                 </a>
               </li>

@@ -5,7 +5,7 @@ session_start();
 <form action="editar-empleado" method="POST" id="FormEditEmpleado">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
   <div class="modal-header bg-dark">
-    <h4 class="modal-title">ACTUALIZAR EMPLEADO</h4>
+    <h4 class="modal-title">ACTUALIZAR  ASEGURADO</h4>
     <h4 class="modal-title">COD.: <?php echo $empleado->cod_asegurado;?></h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin:-1rem -1rem -1rem;">
       <span aria-hidden="true">&times;</span>

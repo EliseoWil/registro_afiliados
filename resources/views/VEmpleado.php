@@ -7,7 +7,7 @@
   </section>
 
   <section class="content">
-    <h4>Lista de Empleados Asegurados</h4>
+    <h4>Lista de Asegurados</h4>
     <table id="DataTable" class="table table-bordered table-striped">
       <thead>
         <tr>

@@ -5,7 +5,7 @@ session_start();
 <form action="regCarnetEmp/<?php echo $empleado->cod_asegurado;?>" method="POST" id="FormRegCarnetEmp" enctype="multipart/form-data">
   <input type="hidden" name="_token" value="<?php echo $token; ?>">
   <div class="modal-header bg-dark flex">
-    <h4 class="modal-title">REGISTRAR CARNET DE SEGURO PARA EMPLEADO </h4>
+    <h4 class="modal-title">REGISTRAR CARNET DE SEGURO PARA ASEGURADO </h4>
     <h4 class="modal-title">COD.: <?php echo $empleado->cod_asegurado;?></h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin:-1rem -1rem -1rem;">
       <span aria-hidden="true">&times;</span>
@@ -32,7 +32,7 @@ session_start();
             <label>Imagen <span class="text-muted">(Peso maximo 10MB - JPG,PNG)</span> </label>
             <div class="input-group">
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="imgEmpleado" name="imgEmpleado" onchange="previsualizar()">
+                <input type="file" class="custom-file-input" id="imgEmpleado" name="imgEmpleado" onchange="previsualizarEmp()">
                 <label class="custom-file-label" for="imgEmpleado">Elegir archivo</label>
               </div>
               <div class="input-group-append">

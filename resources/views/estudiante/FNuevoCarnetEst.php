@@ -32,7 +32,7 @@ session_start();
             <label>Imagen <span class="text-muted">(Peso maximo 10MB - JPG,PNG)</span> </label>
             <div class="input-group">
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="imgEstudiante" name="imgEstudiante" onchange="previsualizar()">
+                <input type="file" class="custom-file-input" id="imgEstudiante" name="imgEstudiante" onchange="previsualizarEstu()">
                 <label class="custom-file-label" for="imgEstudiante">Elegir archivo</label>
               </div>
               <div class="input-group-append">
